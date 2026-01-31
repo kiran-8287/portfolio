@@ -48,7 +48,7 @@ src/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/kiran-8287/portfolio.git
+   git clone https://github.com/kiran-8287/FUTURE_FS_01
    cd portfolio
    ```
 
