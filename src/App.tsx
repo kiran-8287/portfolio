@@ -53,7 +53,7 @@ function App() {
           <Navbar />
           <HeroSection />
 
-          <main className="container mx-auto max-w-6xl p-4 md:p-12 space-y-32 relative z-10">
+          <main className="container mx-auto max-w-6xl p-4 md:p-12 space-y-20 md:space-y-32 relative z-10">
 
             {/* About Section */}
             <AboutSection />

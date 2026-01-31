@@ -111,7 +111,7 @@ const HeroSection = () => {
                     </Reveal>
 
                     <Reveal width="100%">
-                        <div className="h-12 md:h-16 flex items-center justify-center">
+                        <div className="min-h-[3rem] md:min-h-[4rem] flex items-center justify-center">
                             <p className="text-2xl md:text-4xl font-semibold text-muted-foreground">
                                 I am a <span className="text-foreground typing-cursor">{displayText}</span>
                             </p>
