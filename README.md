@@ -1,26 +1,3 @@
-# ⚡ Sai Kiran Vullengala
-
-<div align="center">
-  <img src="src/assets/profile/profile.jpg" alt="Sai Kiran Vullengala" width="150" height="150" style="border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 20px rgba(0,0,0,0.1);" />
-
-  <h2 align="center">Data Science Student | Full Stack Developer | Problem Solver</h2>
-
-  <p align="center">
-    Building scalable solutions at the intersection of data and code.
-    <br />
-    <a href="https://your-portfolio-url.com"><strong>Explore the Portfolio »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/kiran-8287">GitHub</a>
-    ·
-    <a href="https://www.linkedin.com/in/saikiran-vullengala">LinkedIn</a>
-    ·
-    <a href="mailto:saikiranvullengala@gmail.com">Email</a>
-  </p>
-</div>
-
-<hr />
-
 ## 🚀 About Me
 
 I am a Data Science student at the **Indian Institute of Technology Palakkad** with a strong passion for building scalable software solutions. My expertise spans from crafting intuitive full-stack web applications to implementing complex algorithms in C++ and Python.
