@@ -61,17 +61,23 @@ const CircularSkills = () => {
                                     }}
                                 >
                                     <div
-                                        className="absolute w-10 h-10 md:w-12 md:h-12 transition-transform hover:scale-125 cursor-pointer group pointer-events-auto"
+                                        className="absolute w-10 h-10 md:w-12 md:h-12 transition-transform hover:scale-125 cursor-pointer group pointer-events-auto flex items-center justify-center"
                                         style={{
                                             left: '50%',
                                             top: '10%',
-                                            marginLeft: window.innerWidth < 768 ? '-1.25rem' : '-1.5rem', // Adjust margin logic via CSS preferably but logical check here for diff is complex, sticking to CSS classes
-                                            transform: 'translate(-50%, -50%)', // Better centering
+                                            marginLeft: '-1.25rem', // Default for w-10
+                                            marginTop: '-1.25rem',
                                             animation: `counterRotate 20s linear infinite`
                                         }}
                                     >
+                                        {/* CSS to handle responsive margins */}
+                                        <style>{`
+                                            @media (min-width: 768px) {
+                                                .skill-icon-outer-${index} { margin-left: -1.5rem !important; margin-top: -1.5rem !important; }
+                                            }
+                                        `}</style>
                                         <div
-                                            className="w-full h-full"
+                                            className={`w-full h-full skill-icon-outer-${index}`}
                                             style={{
                                                 transform: `rotate(${-angle}deg)`
                                             }}
@@ -121,16 +127,23 @@ const CircularSkills = () => {
                                     }}
                                 >
                                     <div
-                                        className="absolute w-10 h-10 md:w-12 md:h-12 transition-transform hover:scale-125 cursor-pointer group pointer-events-auto"
+                                        className="absolute w-10 h-10 md:w-12 md:h-12 transition-transform hover:scale-125 cursor-pointer group pointer-events-auto flex items-center justify-center"
                                         style={{
                                             left: '50%',
                                             top: '30%',
-                                            transform: 'translate(-50%, -50%)',
+                                            marginLeft: '-1.25rem',
+                                            marginTop: '-1.25rem',
                                             animation: `counterRotateReverse 15s linear infinite`
                                         }}
                                     >
+                                        {/* CSS to handle responsive margins */}
+                                        <style>{`
+                                            @media (min-width: 768px) {
+                                                .skill-icon-inner-${index} { margin-left: -1.5rem !important; margin-top: -1.5rem !important; }
+                                            }
+                                        `}</style>
                                         <div
-                                            className="w-full h-full"
+                                            className={`w-full h-full skill-icon-inner-${index}`}
                                             style={{
                                                 transform: `rotate(${-angle}deg)`
                                             }}

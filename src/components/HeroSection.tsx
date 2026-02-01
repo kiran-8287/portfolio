@@ -58,12 +58,12 @@ const HeroSection = () => {
             <div className="container mx-auto max-w-4xl relative z-10 text-center">
                 {/* Status Badge */}
                 <div className="mb-6 animate-in fade-in slide-in-from-top duration-1000 delay-100">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black text-white dark:bg-white dark:text-black shadow-sm">
                         <span className="relative flex h-2 w-2">
-                            <span className="status-dot-pulse absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                            <span className="status-dot-pulse absolute inline-flex h-full w-full rounded-full bg-white dark:bg-black opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-white dark:bg-black"></span>
                         </span>
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-green-600 dark:text-green-400">
+                        <span className="text-[10px] font-bold uppercase tracking-wider">
                             Available for new opportunities
                         </span>
                     </div>
