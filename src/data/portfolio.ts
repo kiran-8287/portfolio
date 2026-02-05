@@ -103,7 +103,7 @@ export const portfolioData = {
             title: "Industry Academia Conclave at IIT Palakkad",
             role: "Official Front End Developer",
             location: "Palakkad, India",
-            period: "Nov 2024 - Present",
+            period: "Nov 2024 - Nov 2024",
             description: "Manage the event website and solve problems as they arise. An event that brings together industry leaders, innovators, researchers, and students to interact and explore real-world challenges.",
             image: "https://ugsufdqwqaiqbawfsxwp.supabase.co/storage/v1/object/public/user-files/de73d95d-9cf7-42f7-85d4-ff56b022be32/experience/28eeb76e-82b6-465f-a285-981d2c4d5418-1768322138098.webp"
         },
@@ -112,7 +112,7 @@ export const portfolioData = {
             title: "IAR Cell at IIT Palakkad",
             role: "Tech Team Member",
             location: "Palakkad, India",
-            period: "Aug 2024 - Oct 2024",
+            period: "Aug 2024 - Present",
             description: "Developed and maintained the official IAR Cell website to support industry–academia collaboration initiatives. Implemented responsive UI components, improved usability, and resolved real-time issues during updates and events. Contributed to a platform that connects industry partners, researchers, alumni, and students to enable collaborations, internships, and innovation.",
             image: "https://ugsufdqwqaiqbawfsxwp.supabase.co/storage/v1/object/public/user-files/de73d95d-9cf7-42f7-85d4-ff56b022be32/experience/e368b36f-0e7c-4021-9380-65067f6d0232-1768322383157.jpg"
         }
