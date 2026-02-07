@@ -67,7 +67,7 @@ export const portfolioData = {
                 "I thrive on solving complex problems—whether through optimizing algorithms, designing intuitive user interfaces, or architecting robust backend systems. My goal is to leverage technology to create impactful applications that bridge the gap between data and real-world utility."
             ],
             stats: [
-                { label: "Experience", value: "2+ Years" },
+                { label: "Experience", value: "1+ Years" },
                 { label: "Projects", value: "10+" },
                 { label: "DSA Problems", value: "220+" }
             ],
