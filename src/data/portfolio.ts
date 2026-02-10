@@ -36,6 +36,18 @@ import alumniImg3 from '../assets/projects ss/poject4/iar3.png';
 import alumniImg4 from '../assets/projects ss/poject4/iar4.png';
 import alumniImg5 from '../assets/projects ss/poject4/iar5.png';
 
+// Project 5 images
+import luminaImg1 from '../assets/projects ss/poject5/Screenshot 2026-02-07 114817.png';
+import luminaImg2 from '../assets/projects ss/poject5/Screenshot 2026-02-07 131107.png';
+import luminaImg3 from '../assets/projects ss/poject5/Screenshot 2026-02-07 131123.png';
+import luminaImg4 from '../assets/projects ss/poject5/Screenshot 2026-02-07 131148.png';
+import luminaImg5 from '../assets/projects ss/poject5/supabase-schema-vrqbatdytpuflgewhcnk.png';
+
+// Project 6 images
+import portImg1 from '../assets/projects ss/project6/Screenshot 2026-02-01 133209.png';
+import portImg2 from '../assets/projects ss/project6/Screenshot 2026-02-10 201423.png';
+import portImg3 from '../assets/projects ss/project6/Screenshot 2026-02-10 201342.png';
+
 // Technology logos map
 export const technologyLogos: Record<string, string> = {
     'React': reactLogo,
@@ -124,7 +136,7 @@ export const portfolioData = {
             degree: "B.Tech in Data Science",
             period: "2024 - 2028",
             location: "Palakkad, India",
-            details: "Relevant Coursework: Data Structures & Algorithms, Web Technologies (HTML, CSS, JS, React), Object-Oriented Programming (OOP)",
+            details: "Relevant Coursework: Data Structures & Algorithms, DataBase Management Systems, Object-Oriented Programming (OOP)",
             image: "https://ugsufdqwqaiqbawfsxwp.supabase.co/storage/v1/object/public/user-files/de73d95d-9cf7-42f7-85d4-ff56b022be32/education/ce284441-0f30-46e1-9af5-3941df059f55-1768322486224.jpg"
         },
         {
@@ -221,6 +233,36 @@ export const portfolioData = {
                     { label: "Dashboard", url: "https://github.com/kiran-8287/IAR-Dashboard" },
                     { label: "Profile Page", url: "https://github.com/kiran-8287/IAR-Alumini-Profile-Page" }
                 ]
+            }
+        },
+        {
+            id: "lumina-crm",
+            name: "Lumina CRM",
+            category: "Full-Stack Application",
+            description: "Lumina CRM is a full-stack client lead management system built to simulate real-world SaaS CRM workflows. It supports end-to-end lead lifecycle tracking, secure JWT-based authentication, and role-protected routes.",
+            fullDescription: "Lumina CRM is a full-stack client lead management system built to simulate real-world SaaS CRM workflows. It supports end-to-end lead lifecycle tracking, secure JWT-based authentication, and role-protected routes. The application features lead analytics, activity timelines, and advanced filtering for efficient lead management. The frontend is developed using React and TypeScript, while the backend uses Node.js and Express. PostgreSQL (Supabase) is used for relational data storage with well-structured schemas. The project emphasizes scalable architecture, clean API design, and practical application of database concepts learned through coursework.",
+            technologies: ["React", "TypeScript", "Node.js", "PostgreSQL", "Tailwind"],
+            image: luminaImg1,
+            images: [luminaImg1, luminaImg2, luminaImg3, luminaImg4, luminaImg5],
+            status: "completed",
+            links: {
+                github: "https://github.com/kiran-8287/FUTURE_FS_02",
+                video: "https://www.linkedin.com/posts/saikiran-vullengala_postgresql-fullstack-reactjs-activity-7425804491293184001-CA76?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAFNaoGoB-qDVGkOpGqQho3uU5D12E3AfXHY&utm_campaign=copy_link"
+            }
+        },
+        {
+            id: "portfolio-v2",
+            name: "Portfolio",
+            category: "Web Application",
+            description: "A modern, interactive developer portfolio built to showcase skills and projects with a focus on smooth animations and responsive layouts.",
+            fullDescription: "This project is a modern, interactive developer portfolio built to showcase my skills, projects, and experience in a visually engaging way. It features a sleek UI designed with React, TypeScript, and Tailwind CSS, focusing on smooth animations and responsive layouts. Advanced UI interactions such as glassmorphism, magnetic buttons, and 3D elements enhance user experience. The application supports seamless dark/light theme switching with persistent preferences. Performance is optimized using Vite for fast builds and hot module reloading. The project reflects an emphasis on clean architecture, reusable components, and modern frontend best practices.",
+            technologies: ["React", "TypeScript", "Tailwind", "Vite"],
+            image: portImg1,
+            images: [portImg1, portImg2, portImg3],
+            status: "completed",
+            links: {
+                github: "https://github.com/kiran-8287/FUTURE_FS_01",
+                demo: "https://kirann-portfolio.netlify.app/"
             }
         }
     ]

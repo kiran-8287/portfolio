@@ -161,7 +161,7 @@ function App() {
                   return (
                     <Reveal width="100%" key={project.id}>
                       <div
-                        className="project-card spotlight-card h-full rounded-2xl border bg-card/50 backdrop-blur-md text-card-foreground shadow-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+                        className="project-card spotlight-card h-full rounded-2xl border dark:border-white/20 bg-card/50 backdrop-blur-md text-card-foreground shadow-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
                         onMouseMove={(e) => {
                           const rect = e.currentTarget.getBoundingClientRect();
                           const x = e.clientX - rect.left;
