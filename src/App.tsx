@@ -22,6 +22,9 @@ function App() {
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [showAllProjects, setShowAllProjects] = useState(false);
+
+  const visibleProjects = showAllProjects ? projects : projects.slice(0, 4);
 
   const handleViewMore = (project: typeof projects[0]) => {
     setSelectedProject(project);
@@ -157,7 +160,7 @@ function App() {
                 <h2 className="text-3xl text-center font-bold text-primary mb-10">Projects</h2>
               </Reveal>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {projects.map((project) => {
+                {visibleProjects.map((project) => {
                   return (
                     <Reveal width="100%" key={project.id}>
                       <div
@@ -230,6 +233,49 @@ function App() {
                     </Reveal>
                   );
                 })}
+              </div>
+
+              {/* View More / Show Less Toggle Button */}
+              <div className="flex justify-center mt-12">
+                <Magnetic>
+                  <button
+                    onClick={() => {
+                      if (showAllProjects) {
+                        setShowAllProjects(false);
+                        const element = document.getElementById('projects');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      } else {
+                        setShowAllProjects(true);
+                      }
+                    }}
+                    className="group relative flex items-center justify-center gap-2.5 py-3.5 px-8 rounded-full font-bold text-sm bg-black text-white dark:bg-white dark:text-black hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 border border-black dark:border-white"
+                  >
+                    <span>{showAllProjects ? 'Show Less' : 'View All Projects'}</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className={`transition-transform duration-300 ${showAllProjects ? 'group-hover:-translate-y-1' : 'group-hover:translate-x-1.5'}`}
+                    >
+                      {showAllProjects ? (
+                        <path d="m18 15-6-6-6 6" />
+                      ) : (
+                        <>
+                          <path d="M5 12h14" />
+                          <path d="m12 5 7 7-7 7" />
+                        </>
+                      )}
+                    </svg>
+                  </button>
+                </Magnetic>
               </div>
             </section>
 
