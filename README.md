@@ -81,7 +81,8 @@ src/
 
 ## 📸 Portfolio Preview
 
-*(Add screenshots of your portfolio sections here to showcase the design)*
+<img width="1919" height="912" alt="Screenshot 2026-02-01 133209" src="https://github.com/user-attachments/assets/9b1e378f-c8c1-409f-91ed-7ca0aac5b247" />
+<img width="1917" height="911" alt="Screenshot 2026-02-10 201423" src="https://github.com/user-attachments/assets/8636f63c-9c2c-4ceb-b767-8e320d0d9586" />
 
 ## 🤝 Contact
 
