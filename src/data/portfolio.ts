@@ -159,7 +159,7 @@ export const portfolioData = {
         {
             id: "iar",
             title: "IAR Cell at IIT Palakkad",
-            role: "Tech Team Member",
+            role: "Technical Team Lead",
             location: "Palakkad, India",
             period: "Aug 2024 - Present",
             description: "Developed and maintained the official IAR Cell website to support industry–academia collaboration initiatives. Implemented responsive UI components, improved usability, and resolved real-time issues during updates and events. Contributed to a platform that connects industry partners, researchers, alumni, and students to enable collaborations, internships, and innovation.",
