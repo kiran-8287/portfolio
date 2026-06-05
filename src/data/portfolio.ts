@@ -12,6 +12,7 @@ import linkedinLogo from '../assets/logos/linkedin.svg';
 import mailLogo from '../assets/logos/mail.svg';
 import resumeLogo from '../assets/logos/resume.png';
 import svelteLogo from '../assets/logos/svelte.svg';
+import resumePdf from '../assets/sai_kiran_resume.pdf';
 import viteLogo from '../assets/logos/vite.svg';
 import profilePicture from '../assets/profile/profile.jpg';
 
@@ -125,7 +126,7 @@ export const portfolioData = {
         links: {
             github: "https://github.com/kiran-8287",
             linkedin: "https://www.linkedin.com/in/saikiran-vullengala",
-            resume: "https://drive.google.com/file/d/19-el8fIOGZWRsVMX40jH2R1nMizYRs1U/view?usp=sharing",
+            resume: resumePdf,
             email: "mailto:saikiranvullengala@gmail.com"
         },
         icons: {
