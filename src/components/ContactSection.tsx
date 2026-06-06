@@ -1,11 +1,15 @@
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import { FiMail, FiMessageSquare, FiUser } from 'react-icons/fi';
 
 interface ContactFormData {
     fullName: string;
     email: string;
     message: string;
 }
+
+const inputClassName =
+    'w-full px-4 py-4 bg-white dark:bg-background/80 border-0 border-l-2 border-l-foreground/15 rounded-r-lg text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:border-l-foreground focus:ring-0 transition-all';
 
 const ContactSection = () => {
     const [formData, setFormData] = useState<ContactFormData>({
@@ -53,7 +57,6 @@ const ContactSection = () => {
             setSubmitStatus('success');
             setFormData({ fullName: '', email: '', message: '' });
 
-            // Reset status after success
             setTimeout(() => {
                 setSubmitStatus('idle');
             }, 5000);
@@ -67,84 +70,95 @@ const ContactSection = () => {
 
     return (
         <section className="animate-in fade-in slide-in-from-bottom duration-700">
-            <div className="max-w-2xl mx-auto">
-                <div className="text-center mb-12">
+            <div className="max-w-[560px] mx-auto">
+                <div className="text-center mb-10">
                     <h2 className="text-4xl font-bold text-primary mb-4">Let's Talk</h2>
                     <p className="text-muted-foreground text-lg leading-relaxed">
-                        Whether you're looking to build a new website, or a existing platform,
-                        or to bring a project to life, I'm here to help.
+                        Got an idea, an opportunity, or just want to say hi? My inbox is always open.
                     </p>
                 </div>
 
-                <form ref={form} onSubmit={handleSubmit} className="contact-form space-y-6">
-                    <div className="form-group">
-                        <label htmlFor="fullName" className="block text-sm font-medium mb-2">
-                            Full Name
-                        </label>
-                        <input
-                            type="text"
-                            id="fullName"
-                            name="fullName"
-                            value={formData.fullName}
-                            onChange={handleChange}
-                            placeholder="Violet"
-                            required
-                            className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="email" className="block text-sm font-medium mb-2">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            placeholder="Violet@gmail.com"
-                            required
-                            className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="message" className="block text-sm font-medium mb-2">
-                            Message
-                        </label>
-                        <textarea
-                            id="message"
-                            name="message"
-                            value={formData.message}
-                            onChange={handleChange}
-                            placeholder="Share your thoughts"
-                            required
-                            rows={5}
-                            className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
-                        />
-                    </div>
-
-                    <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="contact-submit-btn w-full py-3 px-6 rounded-lg font-medium text-black bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                        {isSubmitting ? 'Sending...' : 'Send'}
-                    </button>
-
-                    {submitStatus === 'success' && (
-                        <div className="text-center text-sm text-green-600 dark:text-green-400 animate-in fade-in">
-                            Message sent successfully! I'll get back to you soon.
+                <div className="bg-[#F7F7F7] dark:bg-secondary/20 rounded-xl p-10 border border-border/40">
+                    <form ref={form} onSubmit={handleSubmit} className="contact-form space-y-6">
+                        <div className="form-group">
+                            <label htmlFor="fullName" className="flex items-center gap-1.5 text-sm font-medium mb-2">
+                                <FiUser className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
+                                Full Name
+                            </label>
+                            <input
+                                type="text"
+                                id="fullName"
+                                name="fullName"
+                                value={formData.fullName}
+                                onChange={handleChange}
+                                placeholder="What should I call you?"
+                                required
+                                className={inputClassName}
+                            />
                         </div>
-                    )}
 
-                    {submitStatus === 'error' && (
-                        <div className="text-center text-sm text-red-600 dark:text-red-400 animate-in fade-in">
-                            Failed to send message. Please check your credentials or try again later.
+                        <div className="form-group">
+                            <label htmlFor="email" className="flex items-center gap-1.5 text-sm font-medium mb-2">
+                                <FiMail className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
+                                Email
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                placeholder="Where can I reply?"
+                                required
+                                className={inputClassName}
+                            />
                         </div>
-                    )}
-                </form>
+
+                        <div className="form-group">
+                            <label htmlFor="message" className="flex items-center gap-1.5 text-sm font-medium mb-2">
+                                <FiMessageSquare className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
+                                Message
+                            </label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                value={formData.message}
+                                onChange={handleChange}
+                                placeholder="What's on your mind?"
+                                required
+                                rows={6}
+                                className={`${inputClassName} min-h-[160px] resize-y`}
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className="contact-submit-btn w-full py-4 px-6 rounded-lg font-medium bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        >
+                            {isSubmitting ? (
+                                'Sending...'
+                            ) : (
+                                <>
+                                    Send
+                                    <span aria-hidden="true">→</span>
+                                </>
+                            )}
+                        </button>
+
+                        {submitStatus === 'success' && (
+                            <div className="text-center text-sm text-green-600 dark:text-green-400 animate-in fade-in">
+                                Message sent successfully! I'll get back to you soon.
+                            </div>
+                        )}
+
+                        {submitStatus === 'error' && (
+                            <div className="text-center text-sm text-red-600 dark:text-red-400 animate-in fade-in">
+                                Failed to send message. Please check your credentials or try again later.
+                            </div>
+                        )}
+                    </form>
+                </div>
             </div>
         </section>
     );

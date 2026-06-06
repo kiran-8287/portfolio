@@ -106,20 +106,22 @@ export const technologyLogos: Record<string, string> = {
 export const portfolioData = {
     personal: {
         name: "Sai Kiran Vullengala",
-        title: "Data Science Student",
+        title: "Full-stack dev. Occasional bug whisperer.",
         location: "IIT Palakkad, India",
         email: "saikiranvullengala@gmail.com",
-        about: "I am a Data Science student at the Indian Institute of Technology Palakkad, where I specialize in building scalable solutions at the intersection of data and code. My expertise spans from crafting intuitive full-stack web applications with React and Node.js to implementing complex algorithms in C++ and Python. I'm passionate about solving real-world problems through efficient, maintainable code and am constantly exploring new technologies to stay at the forefront of the industry. Currently, I'm focusing on AI integration and high-performance system architecture.",
+        about: "I'm Sai Kiran — 2nd year B.Tech Data Science at IIT Palakkad (CGPA: 8.38). I build full-stack apps, AI-powered tools, and whatever idea won't leave me alone at 2 AM.",
         aboutSection: {
             title: "About Me",
             description: [
-                "I am a results-driven Data Science student at IIT Palakkad with a strong passion for building scalable software solutions. My journey blends rigorous academic coursework with practical, hands-on development experience.",
-                "I thrive on solving complex problems—whether through optimizing algorithms, designing intuitive user interfaces, or architecting robust backend systems. My goal is to leverage technology to create impactful applications that bridge the gap between data and real-world utility."
+                "I'm Sai Kiran — 2nd year B.Tech Data Science at IIT Palakkad (CGPA: 8.38). I build full-stack apps, AI-powered tools, and whatever idea won't leave me alone at 2 AM.",
+                "So far that's meant: a Hospital Management System with automated PostgreSQL billing and real-time room tracking, a 2D interior design platform with CAD-like tools and live cost estimation, a campus ordering system with Supabase Realtime and Razorpay, and FinVoice — a voice-first AI banking assistant built with the Gemini Live API that understands English, Hindi, and Telugu. All from scratch. All full-stack.",
+                "I lead the tech team at IAR Cell, building a platform that serves 2,000+ alumni. I've competed at India's largest agentic AI hackathon. I've solved 230+ LeetCode problems in C++ and I'm the kind of person who gets stuck on a bug for 3 hours, sleeps on it, fixes it in 10 minutes the next morning, and feels unreasonably happy about it.",
+                "Curious about everything — tech, design, games, how things work, why things break. Always building something. Open to SWE internships in 2026."
             ],
             stats: [
                 { label: "Experience", value: "1+ Years" },
-                { label: "Projects", value: "10+" },
-                { label: "DSA Problems", value: "220+" }
+                { label: "Projects", value: "6+" },
+                { label: "LeetCode", value: "230+" }
             ],
             profileImage: profilePicture
         },
@@ -136,10 +138,14 @@ export const portfolioData = {
             github: githubLogo
         },
         typingText: [
-            "Full-Stack Developer",
-            "Data Science Student",
-            "Problem Solver",
-            "Scalable Systems Builder"
+            "Building whatever refuses to stay inside my head.",
+            "Ideas → Code → Deploy → Repeat.",
+            "Student by enrollment, engineer by obsession.",
+            "Powered by curiosity and side projects.",
+            "Always one side project away from sleep deprivation.",
+            "I treat \"what if...\" as a project requirement.",
+            "Engineering ideas into reality, one commit at a time.",
+            "Building products where software meets intelligence."
         ],
         badge: {
             label: "Student at IIT Palakkad",
