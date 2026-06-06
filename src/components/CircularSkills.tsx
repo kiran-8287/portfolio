@@ -1,179 +1,249 @@
-import { portfolioData } from '../data/portfolio';
+import { useState } from 'react';
 
-const CircularSkills = () => {
-    // Map colors to skill names for the new design
-    const skillColors: { [key: string]: string } = {
-        "HTML": '#E34F26',
-        "CSS": '#1572B6',
-        "JavaScript": '#F7DF1E',
-        "React": '#61DAFB',
-        "Node.js": '#339933',
-        "Python": '#3776AB',
-        "C++": '#00599C',
-        "GitHub": '#181717',
-        "VS Code": '#007ACC',
-        "Tailwind": '#38B2AC'
-    };
+const SKILLS = {
+    inner: [
+        { name: 'C++', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg', color: '#00599C', note: '230+ LeetCode' },
+        { name: 'Python', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', color: '#3776AB', note: 'Data Science' },
+        { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', color: '#F7DF1E', note: 'ES2023+' },
+        { name: 'TypeScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', color: '#3178C6', note: 'Type-safe dev' },
+    ],
+    middle: [
+        { name: 'React', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', color: '#61DAFB', note: 'v18 & v19' },
+        { name: 'Node.js', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', color: '#339933', note: 'Express APIs' },
+        { name: 'Tailwind', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg', color: '#38B2AC', note: 'CSS framework' },
+        { name: 'Vite', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg', color: '#646CFF', note: 'Build tool' },
+        { name: 'Express', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg', color: '#000000', note: 'REST APIs' },
+    ],
+    outer: [
+        { name: 'PostgreSQL', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg', color: '#336791', note: 'Triggers + SQL' },
+        { name: 'Supabase', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg', color: '#3ECF8E', note: 'Realtime + Auth' },
+        { name: 'Git', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', color: '#F05032', note: 'Version control' },
+        { name: 'GitHub', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg', color: '#181717', note: 'CI/CD + PRs' },
+        { name: 'Vercel', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg', color: '#000000', note: 'Deployments' },
+        { name: 'HTML5', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg', color: '#E34F26', note: 'Semantic HTML' },
+        { name: 'CSS3', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg', color: '#1572B6', note: 'Responsive UI' },
+    ],
+};
 
-    const skills = portfolioData.skills;
-    const outerSkills = skills.slice(0, 5);
-    const innerSkills = skills.slice(5);
+type Skill = { name: string; logo: string; color: string; note: string };
+
+interface OrbitRingProps {
+    skills: Skill[];
+    radiusPct: number;
+    duration: number;
+    reverse?: boolean;
+    iconSize: number;
+}
+
+function OrbitRing({ skills, radiusPct, duration, reverse = false, iconSize }: OrbitRingProps) {
+    const [hovered, setHovered] = useState<string | null>(null);
+    const dir = reverse ? 'reverse' : 'normal';
+    const counterDir = reverse ? 'normal' : 'reverse';
 
     return (
-        <div className="min-h-[50vh] md:min-h-screen bg-background flex items-center justify-center p-4 md:p-8 transition-colors duration-300 overflow-hidden">
-            <div className="w-full max-w-4xl">
-                <h1 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-6 md:mb-10">
-                    Technical Skills
-                </h1>
+        <>
+            {skills.map((skill, i) => {
+                const angleDeg = (360 / skills.length) * i;
+                const isHovered = hovered === skill.name;
 
-                <div className="relative w-full aspect-square max-w-[300px] md:max-w-lg mx-auto">
-                    {/* Outer circle track */}
-                    <div className="absolute inset-0 rounded-full border-2 border-border/50"
-                        style={{ margin: '10%' }} />
+                return (
+                    <div
+                        key={skill.name}
+                        className="absolute inset-0 pointer-events-none"
+                        style={{ transform: `rotate(${angleDeg}deg)` }}
+                    >
+                        <div
+                            className="absolute inset-0"
+                            style={{
+                                animation: `orbitSpin ${duration}s linear infinite`,
+                                animationDirection: dir,
+                            }}
+                        >
+                            <div
+                                className="absolute pointer-events-auto"
+                                style={{
+                                    left: '50%',
+                                    top: `${radiusPct}%`,
+                                    width: iconSize,
+                                    height: iconSize,
+                                    marginLeft: -iconSize / 2,
+                                    marginTop: -iconSize / 2,
+                                    animation: `orbitSpin ${duration}s linear infinite`,
+                                    animationDirection: counterDir,
+                                }}
+                                onMouseEnter={() => setHovered(skill.name)}
+                                onMouseLeave={() => setHovered(null)}
+                            >
+                                <div
+                                    style={{
+                                        transform: `rotate(${-angleDeg}deg)`,
+                                        width: '100%',
+                                        height: '100%',
+                                        position: 'relative',
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            borderRadius: 14,
+                                            background: isHovered ? `${skill.color}15` : '#ffffff',
+                                            border: `1.5px solid ${isHovered ? `${skill.color}60` : '#e5e5e5'}`,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            boxShadow: isHovered
+                                                ? `0 0 0 3px ${skill.color}20, 0 8px 24px ${skill.color}25`
+                                                : '0 2px 8px rgba(0,0,0,0.08)',
+                                            transform: isHovered ? 'scale(1.22)' : 'scale(1)',
+                                            transition: 'all 0.2s cubic-bezier(0.34,1.56,0.64,1)',
+                                            cursor: 'pointer',
+                                            zIndex: isHovered ? 50 : 1,
+                                            position: 'relative',
+                                        }}
+                                    >
+                                        <img
+                                            src={skill.logo}
+                                            alt={skill.name}
+                                            style={{
+                                                width: iconSize * 0.52,
+                                                height: iconSize * 0.52,
+                                                objectFit: 'contain',
+                                            }}
+                                        />
+                                    </div>
 
-                    {/* Inner circle track */}
-                    <div className="absolute inset-0 rounded-full border-2 border-border/50"
-                        style={{ margin: '30%' }} />
-
-                    {/* Center hub */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-yellow-200 via-yellow-100 to-amber-100 rounded-full border-4 border-border flex items-center justify-center shadow-lg">
-                        <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-yellow-100 via-yellow-50 to-amber-50 rounded-full animate-pulse" />
+                                    {isHovered && (
+                                        <div
+                                            style={{
+                                                position: 'absolute',
+                                                top: 'calc(100% + 8px)',
+                                                left: '50%',
+                                                transform: 'translateX(-50%)',
+                                                background: '#111',
+                                                color: '#fff',
+                                                borderRadius: 8,
+                                                padding: '5px 10px',
+                                                fontSize: 11,
+                                                whiteSpace: 'nowrap',
+                                                pointerEvents: 'none',
+                                                zIndex: 100,
+                                                boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+                                            }}
+                                        >
+                                            <div style={{ fontWeight: 600, marginBottom: 1 }}>{skill.name}</div>
+                                            <div style={{ opacity: 0.65, fontSize: 10 }}>{skill.note}</div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                );
+            })}
+        </>
+    );
+}
 
-                    {/* Outer ring skills */}
-                    {outerSkills.map((skill, index) => {
-                        const angle = (360 / outerSkills.length) * index;
-                        const color = skillColors[skill.name] || '#ffffff';
-                        const currentLogo = skill.logo;
+const ORBIT_RADII = {
+    outer: 6,
+    middle: 23,
+    inner: 40,
+};
 
-                        return (
-                            <div
-                                key={skill.name}
-                                className="absolute inset-0 pointer-events-none"
-                                style={{
-                                    transform: `rotate(${angle}deg)`
-                                }}
-                            >
-                                <div
-                                    className="absolute inset-0"
-                                    style={{
-                                        animation: `rotate 20s linear infinite`
-                                    }}
-                                >
-                                    <div
-                                        className="absolute w-10 h-10 md:w-12 md:h-12 transition-transform hover:scale-125 cursor-pointer group pointer-events-auto flex items-center justify-center"
-                                        style={{
-                                            left: '50%',
-                                            top: '10%',
-                                            marginLeft: '-1.25rem', // Default for w-10
-                                            marginTop: '-1.25rem',
-                                            animation: `counterRotate 20s linear infinite`
-                                        }}
-                                    >
-                                        {/* CSS to handle responsive margins */}
-                                        <style>{`
-                                            @media (min-width: 768px) {
-                                                .skill-icon-outer-${index} { margin-left: -1.5rem !important; margin-top: -1.5rem !important; }
-                                            }
-                                        `}</style>
-                                        <div
-                                            className={`w-full h-full skill-icon-outer-${index}`}
-                                            style={{
-                                                transform: `rotate(${-angle}deg)`
-                                            }}
-                                        >
-                                            <div
-                                                className="w-full h-full rounded-2xl bg-card border-2 border-border/50 flex items-center justify-center shadow-xl group-hover:shadow-2xl transition-all group-hover:z-50 relative"
-                                                style={{
-                                                    borderColor: color + '40'
-                                                }}
-                                            >
-                                                <img
-                                                    src={currentLogo}
-                                                    alt={skill.name}
-                                                    className="w-5 h-5 md:w-6 md:h-6 object-contain drop-shadow-md"
-                                                />
-                                            </div>
-                                            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none transform group-hover:translate-y-1 z-50">
-                                                <span className="text-[10px] md:text-xs font-semibold text-white bg-slate-900/90 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-lg border border-white/10 uppercase tracking-wider">
-                                                    {skill.name}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        );
-                    })}
+const ORBITS = [
+    {
+        key: 'outer',
+        label: 'Tools & DB',
+        color: '#888888',
+        radius: ORBIT_RADII.outer,
+        skills: SKILLS.outer,
+        duration: 40,
+        reverse: false,
+        iconSize: 40,
+    },
+    {
+        key: 'middle',
+        label: 'Frameworks',
+        color: '#0F6E56',
+        radius: ORBIT_RADII.middle,
+        skills: SKILLS.middle,
+        duration: 30,
+        reverse: true,
+        iconSize: 44,
+    },
+    {
+        key: 'inner',
+        label: 'Languages',
+        color: '#534AB7',
+        radius: ORBIT_RADII.inner,
+        skills: SKILLS.inner,
+        duration: 22,
+        reverse: false,
+        iconSize: 48,
+    },
+] as const;
 
-                    {/* Inner ring skills */}
-                    {innerSkills.map((skill, index) => {
-                        const angle = (360 / innerSkills.length) * index;
-                        const color = skillColors[skill.name] || '#ffffff';
-                        const currentLogo = skill.logo;
+const LEGEND = [
+    { label: 'Languages', color: '#534AB7' },
+    { label: 'Frameworks', color: '#0F6E56' },
+    { label: 'Tools & DB', color: '#888888' },
+];
 
-                        return (
-                            <div
-                                key={skill.name}
-                                className="absolute inset-0 pointer-events-none"
-                                style={{
-                                    transform: `rotate(${angle}deg)`
-                                }}
-                            >
-                                <div
-                                    className="absolute inset-0"
-                                    style={{
-                                        animation: `rotateReverse 15s linear infinite`
-                                    }}
-                                >
-                                    <div
-                                        className="absolute w-10 h-10 md:w-12 md:h-12 transition-transform hover:scale-125 cursor-pointer group pointer-events-auto flex items-center justify-center"
-                                        style={{
-                                            left: '50%',
-                                            top: '30%',
-                                            marginLeft: '-1.25rem',
-                                            marginTop: '-1.25rem',
-                                            animation: `counterRotateReverse 15s linear infinite`
-                                        }}
-                                    >
-                                        {/* CSS to handle responsive margins */}
-                                        <style>{`
-                                            @media (min-width: 768px) {
-                                                .skill-icon-inner-${index} { margin-left: -1.5rem !important; margin-top: -1.5rem !important; }
-                                            }
-                                        `}</style>
-                                        <div
-                                            className={`w-full h-full skill-icon-inner-${index}`}
-                                            style={{
-                                                transform: `rotate(${-angle}deg)`
-                                            }}
-                                        >
-                                            <div
-                                                className="w-full h-full rounded-xl bg-card border-2 border-border/50 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all group-hover:z-50 relative"
-                                                style={{ borderColor: color + '40' }}
-                                            >
-                                                <img
-                                                    src={currentLogo}
-                                                    alt={skill.name}
-                                                    className="w-5 h-5 md:w-6 md:h-6 object-contain drop-shadow-md"
-                                                />
-                                            </div>
-                                            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none transform group-hover:translate-y-1 z-50">
-                                                <span className="text-[10px] md:text-xs font-semibold text-white bg-slate-900/90 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-lg border border-white/10 uppercase tracking-wider">
-                                                    {skill.name}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        );
-                    })}
+const CircularSkills = () => {
+    return (
+        <section className="min-h-screen bg-white flex items-center justify-center px-8 py-16 flex-col">
+            <div className="text-center mb-10">
+                <p className="font-mono text-xs text-gray-400 mb-1.5 tracking-widest">
+                    {'// the tools I actually use'}
+                </p>
+                <h2 className="font-serif text-[clamp(22px,3vw,32px)] font-bold text-gray-900 tracking-tight">
+                    My Tech Stack
+                </h2>
+            </div>
+
+            <div
+                className="relative w-[min(520px,90vw)] h-[min(520px,90vw)]"
+            >
+                {ORBITS.map((orbit) => (
+                    <div
+                        key={orbit.key}
+                        className="absolute rounded-full border border-dashed"
+                        style={{
+                            inset: `${orbit.radius}%`,
+                            borderColor: `${orbit.color}55`,
+                        }}
+                    />
+                ))}
+
+                <div className="skills-orbit-hub absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center text-sm font-bold text-[#534AB7] font-mono tracking-tight z-10">
+                    SKV
                 </div>
 
-
+                {ORBITS.map((orbit) => (
+                    <OrbitRing
+                        key={orbit.key}
+                        skills={orbit.skills}
+                        radiusPct={orbit.radius}
+                        duration={orbit.duration}
+                        reverse={orbit.reverse}
+                        iconSize={orbit.iconSize}
+                    />
+                ))}
             </div>
-        </div>
+
+            <div className="flex gap-6 mt-10 flex-wrap justify-center">
+                {LEGEND.map((item) => (
+                    <div key={item.label} className="flex items-center gap-1.5 text-xs text-gray-500">
+                        <span
+                            className="w-2 h-2 rounded-full inline-block"
+                            style={{ background: item.color }}
+                        />
+                        {item.label}
+                    </div>
+                ))}
+            </div>
+        </section>
     );
 };
 

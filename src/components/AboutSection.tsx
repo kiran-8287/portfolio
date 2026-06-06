@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import { portfolioData } from '../data/portfolio';
 import { Reveal } from './Reveal';
 
 const AboutSection = () => {
     const { aboutSection } = portfolioData.personal;
+    const [expanded, setExpanded] = useState(false);
+    const previewParagraphs = aboutSection.description.slice(0, 2);
+    const hiddenParagraphs = aboutSection.description.slice(2);
+    const visibleParagraphs = expanded ? aboutSection.description : previewParagraphs;
 
     return (
         <section id="about" className="scroll-mt-20">
@@ -35,11 +40,22 @@ const AboutSection = () => {
                 {/* Content Side */}
                 <div className="space-y-8">
                     <div className="space-y-4 text-muted-foreground leading-relaxed text-lg">
-                        {aboutSection.description.map((paragraph, index) => (
+                        {visibleParagraphs.map((paragraph, index) => (
                             <Reveal width="100%" key={index}>
                                 <p>{paragraph}</p>
                             </Reveal>
                         ))}
+                        {hiddenParagraphs.length > 0 && (
+                            <Reveal width="100%">
+                                <button
+                                    type="button"
+                                    onClick={() => setExpanded((prev) => !prev)}
+                                    className="text-primary font-medium hover:underline underline-offset-4 transition-colors"
+                                >
+                                    {expanded ? 'Read less' : 'Read more...'}
+                                </button>
+                            </Reveal>
+                        )}
                     </div>
 
                     {/* Stats Grid */}

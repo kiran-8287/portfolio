@@ -16,6 +16,13 @@ import Preloader from './components/Preloader';
 import { AnimatePresence } from 'framer-motion';
 import ProjectImage from './components/ProjectImage';
 
+const PROJECT_ACCENTS: Record<string, string> = {
+  'nescafe-iitpkd': '#F59E0B',
+  planora: '#7F77DD',
+  'fin-voice': '#3B82F6',
+  'aarogya-hms': '#0F6E56',
+};
+
 function App() {
   const { experience, education, projects } = portfolioData;
 
@@ -157,14 +164,25 @@ function App() {
             {/* Projects */}
             <section id="projects" className="scroll-mt-20">
               <Reveal width="100%">
-                <h2 className="text-3xl text-center font-bold text-primary mb-10">Projects</h2>
+                <div className="text-center mb-10">
+                  <p className="font-mono text-xs text-muted-foreground mb-1.5 tracking-widest">
+                    // selected work
+                  </p>
+                  <h2 className="text-3xl font-bold text-primary">Things I've Built</h2>
+                </div>
               </Reveal>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {visibleProjects.map((project) => {
+                  const accentColor = PROJECT_ACCENTS[project.id];
+
                   return (
                     <Reveal width="100%" key={project.id}>
                       <div
-                        className="project-card spotlight-card h-full rounded-2xl border dark:border-white/20 bg-card/50 backdrop-blur-md text-card-foreground shadow-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+                        className="project-card spotlight-card h-full rounded-2xl border border-border/60 bg-card/50 backdrop-blur-md text-card-foreground shadow-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+                        style={{
+                          borderTopWidth: accentColor ? 3 : undefined,
+                          borderTopColor: accentColor,
+                        }}
                         onMouseMove={(e) => {
                           const rect = e.currentTarget.getBoundingClientRect();
                           const x = e.clientX - rect.left;
@@ -203,7 +221,12 @@ function App() {
                         <div className="p-6 flex flex-col flex-grow relative z-10">
                           <div className="flex justify-between items-start mb-2">
                             <h3 className="text-xl font-bold">{project.name}</h3>
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-primary/50">{project.category}</span>
+                            <span
+                              className={`text-[10px] font-bold uppercase tracking-widest ${accentColor ? '' : 'text-primary/50'}`}
+                              style={accentColor ? { color: `${accentColor}99` } : undefined}
+                            >
+                              {project.category}
+                            </span>
                           </div>
 
                           <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
@@ -222,7 +245,7 @@ function App() {
                             <Magnetic>
                               <button
                                 onClick={() => handleViewMore(project)}
-                                className="w-full py-2 px-4 rounded-xl font-medium text-sm bg-[#000000] text-white dark:bg-white dark:text-black hover:shadow-lg hover:opacity-90 transition-all border border-black"
+                                className="w-full py-2 px-4 rounded-xl font-medium text-sm bg-black text-white hover:shadow-lg hover:opacity-90 transition-all border border-black"
                               >
                                 Explore Project
                               </button>
@@ -250,30 +273,15 @@ function App() {
                         setShowAllProjects(true);
                       }
                     }}
-                    className="group relative flex items-center justify-center gap-2.5 py-3.5 px-8 rounded-full font-bold text-sm bg-black text-white dark:bg-white dark:text-black hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 border border-black dark:border-white"
+                    className="group inline-flex items-center justify-center gap-2 py-3 px-8 rounded-full text-sm font-semibold text-foreground bg-transparent border-2 border-foreground/20 hover:border-foreground/40 hover:bg-foreground/[0.03] active:scale-[0.98] transition-all duration-300"
                   >
                     <span>{showAllProjects ? 'Show Less' : 'View All Projects'}</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className={`transition-transform duration-300 ${showAllProjects ? 'group-hover:-translate-y-1' : 'group-hover:translate-x-1.5'}`}
+                    <span
+                      aria-hidden="true"
+                      className={`transition-transform duration-300 ${showAllProjects ? 'group-hover:-translate-y-0.5' : 'group-hover:translate-x-0.5'}`}
                     >
-                      {showAllProjects ? (
-                        <path d="m18 15-6-6-6 6" />
-                      ) : (
-                        <>
-                          <path d="M5 12h14" />
-                          <path d="m12 5 7 7-7 7" />
-                        </>
-                      )}
-                    </svg>
+                      {showAllProjects ? '↑' : '→'}
+                    </span>
                   </button>
                 </Magnetic>
               </div>
