@@ -56,9 +56,9 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
 
     const getStatusColor = (status: string) => {
         switch (status.toLowerCase()) {
-            case 'completed': return 'bg-green-100 text-green-800 border-green-200';
-            case 'in-progress': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-            default: return 'bg-gray-100 text-gray-800 border-gray-200';
+            case 'completed': return 'bg-green-500/10 text-green-500 border-green-500/20';
+            case 'in-progress': return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
+            default: return 'bg-muted text-muted-foreground border-border';
         }
     };
 
@@ -71,31 +71,31 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
             />
 
             {/* Modal Container */}
-            <div className="relative w-full max-w-[95vw] h-[85vh] bg-background rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row animate-in fade-in zoom-in-95 duration-300">
+            <div className="relative w-full max-w-[95vw] h-[85vh] bg-background rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row animate-in fade-in zoom-in-95 duration-300 border border-border/40">
                 {/* Global Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 z-[60] p-2.5 rounded-full text-white bg-black/45 hover:bg-black/60 md:text-black md:bg-transparent md:hover:bg-gray-100 border border-white/10 md:border-transparent transition-all active:scale-90 shadow-md md:shadow-none"
+                    className="absolute top-4 right-4 z-[60] p-2.5 rounded-full text-white bg-black/45 hover:bg-black/60 md:text-foreground md:bg-transparent md:hover:bg-muted border border-white/10 md:border-transparent transition-all active:scale-90 shadow-md md:shadow-none cursor-pointer"
                     aria-label="Close modal"
                 >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
 
                 {/* LEFT SIDE: Image Gallery (Dark Background) */}
-                <div className="w-full md:w-[65%] h-[40vh] md:h-full bg-black relative flex items-center justify-center p-4">
+                <div className="w-full md:w-[65%] h-[32vh] md:h-full bg-black relative flex items-center justify-center p-4 shrink-0">
                     {/* Navigation Buttons */}
                     {project.images.length > 1 && (
                         <>
                             <button
                                 onClick={(e) => { e.stopPropagation(); handlePrevImage(); }}
-                                className="absolute left-4 z-10 p-2.5 rounded-full bg-white/90 hover:bg-white text-black hover:scale-105 transition-all shadow-lg active:scale-95 border border-white/20"
+                                className="absolute left-4 z-10 p-2.5 rounded-full bg-white/90 hover:bg-white text-black hover:scale-105 transition-all shadow-lg active:scale-95 border border-white/20 cursor-pointer"
                                 aria-label="Previous image"
                             >
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
                             </button>
                             <button
                                 onClick={(e) => { e.stopPropagation(); handleNextImage(); }}
-                                className="absolute right-4 z-10 p-2.5 rounded-full bg-white/90 hover:bg-white text-black hover:scale-105 transition-all shadow-lg active:scale-95 border border-white/20"
+                                className="absolute right-4 z-10 p-2.5 rounded-full bg-white/90 hover:bg-white text-black hover:scale-105 transition-all shadow-lg active:scale-95 border border-white/20 cursor-pointer"
                                 aria-label="Next image"
                             >
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
@@ -125,7 +125,7 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                 </div>
 
                 {/* RIGHT SIDE: Content (Scrollable) */}
-                <div className="w-full md:w-[35%] flex-1 min-h-0 md:h-full bg-white text-black border-l border-gray-200 flex flex-col relative">
+                <div className="w-full md:w-[35%] flex-1 min-h-0 md:h-full bg-card text-card-foreground border-t md:border-t-0 md:border-l border-border/60 flex flex-col relative">
                     <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-8">
                         <div>
                             <h2 className="text-3xl font-bold mb-3">{project.name}</h2>
