@@ -62,14 +62,14 @@ const AboutSection = () => {
                     </div>
 
                     {/* Stats Grid */}
-                    <div className="grid grid-cols-3 gap-4 pt-4">
+                    <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-4">
                         {aboutSection.stats.map((stat, index) => (
                             <Reveal width="100%" key={index} delay={0.1 * index}>
-                                <div className="p-4 rounded-xl bg-secondary/50 border border-border/50 text-center hover:bg-secondary/80 transition-colors">
-                                    <h4 className="text-2xl md:text-3xl font-bold text-primary mb-1">
+                                <div className="p-2.5 sm:p-4 rounded-xl bg-secondary/50 border border-border/50 text-center hover:bg-secondary/80 transition-colors">
+                                    <h4 className="text-base sm:text-2xl md:text-3xl font-bold text-primary mb-1">
                                         {stat.value}
                                     </h4>
-                                    <span className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                                    <span className="text-[9px] sm:text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wider block truncate">
                                         {stat.label}
                                     </span>
                                 </div>

@@ -10,7 +10,7 @@ interface ContactFormData {
 }
 
 const inputClassName =
-    'w-full px-4 py-4 bg-white dark:bg-background/80 border-0 border-l-2 border-l-foreground/15 rounded-r-lg text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:border-l-foreground focus:ring-0 transition-all';
+    'w-full px-3.5 py-3 md:px-4 md:py-4 bg-white dark:bg-background/80 border-0 border-l-2 border-l-foreground/15 rounded-r-lg text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:border-l-foreground focus:ring-0 transition-all text-sm md:text-base';
 
 const ContactSection = () => {
     const [formData, setFormData] = useState<ContactFormData>({
@@ -79,7 +79,7 @@ const ContactSection = () => {
                     </p>
                 </div>
 
-                <div className="bg-[#F7F7F7] dark:bg-secondary/20 rounded-xl p-10 border border-border/40">
+                <div className="bg-[#F7F7F7] dark:bg-secondary/20 rounded-xl p-5 sm:p-8 md:p-10 border border-border/40">
                     <form ref={form} onSubmit={handleSubmit} className="contact-form space-y-6">
                         <div className="form-group">
                             <label htmlFor="fullName" className="flex items-center gap-1.5 text-sm font-medium mb-2">

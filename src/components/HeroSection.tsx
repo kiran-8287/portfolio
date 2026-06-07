@@ -18,7 +18,7 @@ const HeroSection = () => {
     };
 
     return (
-        <section className="relative min-h-[100vh] flex flex-col items-center justify-center pt-20 pb-12 px-4 overflow-hidden bg-white">
+        <section className="relative min-h-[100vh] flex flex-col items-center justify-center pt-24 pb-12 px-4 overflow-hidden bg-transparent">
             <HeroFlowField />
 
             <div className="container mx-auto max-w-4xl relative z-10 text-center">
@@ -49,7 +49,7 @@ const HeroSection = () => {
                     </div>
                 )}
 
-                <div className="hero-profile-container mx-auto mb-10 w-40 h-40 md:w-48 md:h-48 animate-in zoom-in duration-1000">
+                <div className="hero-profile-container mx-auto mb-10 w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 animate-in zoom-in duration-1000">
                     <div className="profile-glow" />
                     <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-background shadow-2xl">
                         {personal.avatar ? (
@@ -68,53 +68,53 @@ const HeroSection = () => {
 
                 <div className="space-y-6">
                     <Reveal width="100%">
-                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+                        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight">
                             Hi, I'm <span className="text-[#87CEEB]">{personal.name.split(' ').slice(0, 2).join(' ')}</span> 👋
                         </h1>
                     </Reveal>
 
                     <Reveal width="100%">
-                        <div className="min-h-[3rem] md:min-h-[4rem] flex items-center justify-center px-2">
-                            <p className="font-mono text-base md:text-xl text-[#0F6E56] tracking-wide">
+                        <div className="min-h-[3.5rem] md:min-h-[4rem] flex items-center justify-center px-2">
+                            <p className="font-mono text-xs sm:text-base md:text-xl text-[#0F6E56] tracking-wide">
                                 <span className="typing-cursor">{displayText}</span>
                             </p>
                         </div>
                     </Reveal>
 
                     <Reveal width="100%">
-                        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                             Building scalable solutions at the intersection of data and code
                         </p>
                     </Reveal>
 
-                    <div className="flex flex-wrap justify-center gap-4 pt-4">
+                    <div className="flex flex-wrap justify-center gap-2 sm:gap-4 pt-4">
                         {personal.links.email && (
                             <Magnetic>
-                                <GooeyButton href={personal.links.email} className="inline-flex items-center justify-center text-sm font-medium border border-gray-200 h-10 rounded-full px-4 gap-2 transition-all shadow-sm bg-white text-black">
-                                    {personal.icons?.email && <img src={personal.icons.email} alt="Email" className="w-4 h-4" />}
+                                <GooeyButton href={personal.links.email} className="inline-flex items-center justify-center text-xs sm:text-sm font-medium border border-border h-10 rounded-full px-3.5 sm:px-4 gap-2 transition-all shadow-sm bg-card text-card-foreground hover:bg-muted">
+                                    {personal.icons?.email && <img src={personal.icons.email} alt="Email" className="w-4 h-4 dark:invert" />}
                                     Email
                                 </GooeyButton>
                             </Magnetic>
                         )}
                         <Magnetic>
-                            <GooeyButton href={personal.links.resume} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center text-sm font-medium border border-gray-200 h-10 rounded-full px-4 gap-2 transition-all shadow-sm bg-white text-black">
+                            <GooeyButton href={personal.links.resume} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center text-xs sm:text-sm font-medium border border-border h-10 rounded-full px-3.5 sm:px-4 gap-2 transition-all shadow-sm bg-card text-card-foreground hover:bg-muted">
                                 {personal.icons?.resume && <img src={personal.icons.resume} alt="Resume" className="w-4 h-4" />}
                                 Resume
                             </GooeyButton>
                         </Magnetic>
                         <Magnetic>
-                            <GooeyButton href={personal.links.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center text-sm font-medium border border-gray-200 h-10 rounded-full px-4 gap-2 transition-all shadow-sm bg-white text-black">
+                            <GooeyButton href={personal.links.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center text-xs sm:text-sm font-medium border border-border h-10 rounded-full px-3.5 sm:px-4 gap-2 transition-all shadow-sm bg-card text-card-foreground hover:bg-muted">
                                 {personal.icons?.linkedin && <img src={personal.icons.linkedin} alt="LinkedIn" className="w-4 h-4" />}
                                 LinkedIn
                             </GooeyButton>
                         </Magnetic>
                         <Magnetic>
-                            <GooeyButton href={personal.links.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center text-sm font-medium border border-gray-200 h-10 rounded-full px-4 gap-2 transition-all shadow-sm bg-white text-black">
+                            <GooeyButton href={personal.links.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center text-xs sm:text-sm font-medium border border-border h-10 rounded-full px-3.5 sm:px-4 gap-2 transition-all shadow-sm bg-card text-card-foreground hover:bg-muted">
                                 {personal.icons?.github && (
                                     <img
                                         src={personal.icons.github}
                                         alt="GitHub"
-                                        className="w-4 h-4"
+                                        className="w-4 h-4 dark:invert"
                                     />
                                 )}
                                 GitHub
@@ -122,11 +122,11 @@ const HeroSection = () => {
                         </Magnetic>
                     </div>
 
-                    <div className="flex flex-wrap items-center justify-center gap-4 pt-8">
+                    <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-8">
                         <Magnetic>
                             <GooeyButton
                                 onClick={() => scrollToSection('projects')}
-                                className="h-12 px-8 rounded-full bg-black text-white font-semibold hover:bg-black/90 transition-all shadow-lg"
+                                className="h-12 px-6 sm:px-8 rounded-full bg-black text-white dark:bg-white dark:text-black font-semibold hover:opacity-90 transition-all shadow-lg"
                             >
                                 View Projects →
                             </GooeyButton>
@@ -134,7 +134,7 @@ const HeroSection = () => {
                         <Magnetic>
                             <GooeyButton
                                 onClick={() => scrollToSection('contact')}
-                                className="h-12 px-8 rounded-full bg-white border border-gray-300 font-semibold hover:bg-gray-50 transition-all shadow-md flex items-center gap-2 text-black"
+                                className="h-12 px-6 sm:px-8 rounded-full bg-white border border-gray-300 font-semibold hover:bg-gray-50 dark:bg-card dark:border-border dark:text-card-foreground transition-all shadow-md flex items-center gap-2 text-black"
                             >
                                 Get In Touch
                             </GooeyButton>

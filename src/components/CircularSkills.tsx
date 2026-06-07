@@ -192,12 +192,12 @@ const LEGEND = [
 
 const CircularSkills = () => {
     return (
-        <section className="min-h-screen bg-white flex items-center justify-center px-4 md:px-8 py-16 flex-col">
+        <section className="min-h-screen bg-transparent flex items-center justify-center px-4 md:px-8 py-16 flex-col">
             <div className="text-center mb-10">
                 <p className="font-mono text-xs text-gray-400 mb-1.5 tracking-widest">
                     {'// the tools I actually use'}
                 </p>
-                <h2 className="font-serif text-[clamp(22px,3vw,32px)] font-bold text-gray-900 tracking-tight">
+                <h2 className="font-serif text-[clamp(22px,3vw,32px)] font-bold text-foreground tracking-tight">
                     My Tech Stack
                 </h2>
             </div>
@@ -234,7 +234,7 @@ const CircularSkills = () => {
             <div className="md:hidden w-full max-w-md mx-auto space-y-6">
                 {ORBITS.map((orbit) => (
                     <div key={orbit.key} className="space-y-3">
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 flex items-center gap-2">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
                             <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: orbit.color }} />
                             {orbit.label}
                         </h3>
@@ -242,14 +242,14 @@ const CircularSkills = () => {
                             {orbit.skills.map((skill) => (
                                 <div
                                     key={skill.name}
-                                    className="p-3 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-2.5 hover:bg-slate-100 transition-all active:scale-[0.98]"
+                                    className="p-3 rounded-xl bg-card border border-border/60 flex items-center gap-2.5 hover:bg-muted/50 transition-all active:scale-[0.98]"
                                 >
-                                    <div className="w-8 h-8 rounded-lg bg-white border border-slate-100 flex items-center justify-center p-1.5 shrink-0 shadow-sm">
+                                    <div className="w-8 h-8 rounded-lg bg-background border border-border/60 flex items-center justify-center p-1.5 shrink-0 shadow-sm">
                                         <img src={skill.logo} alt={skill.name} className="w-full h-full object-contain" />
                                     </div>
                                     <div className="min-w-0">
-                                        <div className="text-xs font-bold text-slate-800 truncate">{skill.name}</div>
-                                        <div className="text-[10px] text-gray-500 truncate">{skill.note}</div>
+                                        <div className="text-xs font-bold text-foreground truncate">{skill.name}</div>
+                                        <div className="text-[10px] text-muted-foreground truncate">{skill.note}</div>
                                     </div>
                                 </div>
                             ))}
