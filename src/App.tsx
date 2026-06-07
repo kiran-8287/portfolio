@@ -165,9 +165,6 @@ function App() {
             <section id="projects" className="scroll-mt-20">
               <Reveal width="100%">
                 <div className="text-center mb-10">
-                  <p className="font-mono text-xs text-muted-foreground mb-1.5 tracking-widest">
-                    // selected work
-                  </p>
                   <h2 className="text-3xl font-bold text-primary">Things I've Built</h2>
                 </div>
               </Reveal>
