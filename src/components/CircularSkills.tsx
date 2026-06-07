@@ -192,7 +192,7 @@ const LEGEND = [
 
 const CircularSkills = () => {
     return (
-        <section className="min-h-screen bg-white flex items-center justify-center px-8 py-16 flex-col">
+        <section className="min-h-screen bg-white flex items-center justify-center px-4 md:px-8 py-16 flex-col">
             <div className="text-center mb-10">
                 <p className="font-mono text-xs text-gray-400 mb-1.5 tracking-widest">
                     {'// the tools I actually use'}
@@ -202,8 +202,9 @@ const CircularSkills = () => {
                 </h2>
             </div>
 
+            {/* Desktop Orbital Stack */}
             <div
-                className="relative w-[min(520px,90vw)] h-[min(520px,90vw)]"
+                className="hidden md:block relative w-[min(520px,90vw)] h-[min(520px,90vw)]"
             >
                 {ORBITS.map((orbit) => (
                     <div
@@ -229,7 +230,36 @@ const CircularSkills = () => {
                 ))}
             </div>
 
-            <div className="flex gap-6 mt-10 flex-wrap justify-center">
+            {/* Mobile Adaptive Skills Grid */}
+            <div className="md:hidden w-full max-w-md mx-auto space-y-6">
+                {ORBITS.map((orbit) => (
+                    <div key={orbit.key} className="space-y-3">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 flex items-center gap-2">
+                            <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: orbit.color }} />
+                            {orbit.label}
+                        </h3>
+                        <div className="grid grid-cols-2 gap-3">
+                            {orbit.skills.map((skill) => (
+                                <div
+                                    key={skill.name}
+                                    className="p-3 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-2.5 hover:bg-slate-100 transition-all active:scale-[0.98]"
+                                >
+                                    <div className="w-8 h-8 rounded-lg bg-white border border-slate-100 flex items-center justify-center p-1.5 shrink-0 shadow-sm">
+                                        <img src={skill.logo} alt={skill.name} className="w-full h-full object-contain" />
+                                    </div>
+                                    <div className="min-w-0">
+                                        <div className="text-xs font-bold text-slate-800 truncate">{skill.name}</div>
+                                        <div className="text-[10px] text-gray-500 truncate">{skill.note}</div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* Desktop Legend */}
+            <div className="hidden md:flex gap-6 mt-10 flex-wrap justify-center">
                 {LEGEND.map((item) => (
                     <div key={item.label} className="flex items-center gap-1.5 text-xs text-gray-500">
                         <span
