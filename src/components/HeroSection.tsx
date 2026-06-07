@@ -3,6 +3,7 @@ import Magnetic from './Magnetic';
 import HeroFlowField from './HeroFlowField';
 import { Reveal } from './Reveal';
 import { useTypewriter } from '../hooks/useTypewriter';
+import GooeyButton from './GooeyButton';
 
 const HeroSection = () => {
     const { personal } = portfolioData;
@@ -68,7 +69,7 @@ const HeroSection = () => {
                 <div className="space-y-6">
                     <Reveal width="100%">
                         <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-                            Hi, I'm <span className="text-[#534AB7]">{personal.name.split(' ').slice(0, 2).join(' ')}</span> 👋
+                            Hi, I'm <span className="text-[#87CEEB]">{personal.name.split(' ').slice(0, 2).join(' ')}</span> 👋
                         </h1>
                     </Reveal>
 
@@ -89,26 +90,26 @@ const HeroSection = () => {
                     <div className="flex flex-wrap justify-center gap-4 pt-4">
                         {personal.links.email && (
                             <Magnetic>
-                                <a href={personal.links.email} className="inline-flex items-center justify-center text-sm font-medium border border-gray-200 h-10 rounded-full px-4 gap-2 transition-all shadow-sm bg-white text-black">
+                                <GooeyButton href={personal.links.email} className="inline-flex items-center justify-center text-sm font-medium border border-gray-200 h-10 rounded-full px-4 gap-2 transition-all shadow-sm bg-white text-black">
                                     {personal.icons?.email && <img src={personal.icons.email} alt="Email" className="w-4 h-4" />}
                                     Email
-                                </a>
+                                </GooeyButton>
                             </Magnetic>
                         )}
                         <Magnetic>
-                            <a href={personal.links.resume} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center text-sm font-medium border border-gray-200 h-10 rounded-full px-4 gap-2 transition-all shadow-sm bg-white text-black">
+                            <GooeyButton href={personal.links.resume} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center text-sm font-medium border border-gray-200 h-10 rounded-full px-4 gap-2 transition-all shadow-sm bg-white text-black">
                                 {personal.icons?.resume && <img src={personal.icons.resume} alt="Resume" className="w-4 h-4" />}
                                 Resume
-                            </a>
+                            </GooeyButton>
                         </Magnetic>
                         <Magnetic>
-                            <a href={personal.links.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center text-sm font-medium border border-gray-200 h-10 rounded-full px-4 gap-2 transition-all shadow-sm bg-white text-black">
+                            <GooeyButton href={personal.links.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center text-sm font-medium border border-gray-200 h-10 rounded-full px-4 gap-2 transition-all shadow-sm bg-white text-black">
                                 {personal.icons?.linkedin && <img src={personal.icons.linkedin} alt="LinkedIn" className="w-4 h-4" />}
                                 LinkedIn
-                            </a>
+                            </GooeyButton>
                         </Magnetic>
                         <Magnetic>
-                            <a href={personal.links.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center text-sm font-medium border border-gray-200 h-10 rounded-full px-4 gap-2 transition-all shadow-sm bg-white text-black">
+                            <GooeyButton href={personal.links.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center text-sm font-medium border border-gray-200 h-10 rounded-full px-4 gap-2 transition-all shadow-sm bg-white text-black">
                                 {personal.icons?.github && (
                                     <img
                                         src={personal.icons.github}
@@ -117,26 +118,26 @@ const HeroSection = () => {
                                     />
                                 )}
                                 GitHub
-                            </a>
+                            </GooeyButton>
                         </Magnetic>
                     </div>
 
                     <div className="flex flex-wrap items-center justify-center gap-4 pt-8">
                         <Magnetic>
-                            <button
+                            <GooeyButton
                                 onClick={() => scrollToSection('projects')}
                                 className="h-12 px-8 rounded-full bg-black text-white font-semibold hover:bg-black/90 transition-all shadow-lg"
                             >
                                 View Projects →
-                            </button>
+                            </GooeyButton>
                         </Magnetic>
                         <Magnetic>
-                            <button
+                            <GooeyButton
                                 onClick={() => scrollToSection('contact')}
                                 className="h-12 px-8 rounded-full bg-white border border-gray-300 font-semibold hover:bg-gray-50 transition-all shadow-md flex items-center gap-2 text-black"
                             >
                                 Get In Touch
-                            </button>
+                            </GooeyButton>
                         </Magnetic>
                     </div>
 

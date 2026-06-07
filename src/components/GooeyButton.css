@@ -1,0 +1,169 @@
+:root {
+  --color-1: #0F6E56;
+  --color-2: #534AB7;
+  --color-3: #3B82F6;
+  --color-4: #EC4899;
+}
+
+.gooey-btn-container {
+  position: relative;
+  display: inline-flex;
+  border-radius: inherit;
+}
+
+.gooey-btn-inner {
+  position: relative;
+  z-index: 3;
+  border-radius: inherit;
+}
+
+.gooey-btn-container.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.gooey-btn-container .effect {
+  position: absolute;
+  inset: 0;
+  opacity: 1;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* --- LIGHT MODE STYLING (Default) --- */
+.gooey-btn-container .effect.filter {
+  filter: blur(6px) contrast(30) blur(0);
+  mix-blend-mode: darken;
+  border-radius: inherit;
+}
+
+.gooey-btn-container .effect.filter::before {
+  content: '';
+  position: absolute;
+  inset: -60px;
+  z-index: -2;
+  background: white;
+  border-radius: inherit;
+}
+
+.gooey-btn-container .effect.filter::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: black;
+  transform: scale(0);
+  opacity: 0;
+  z-index: -1;
+  border-radius: inherit;
+}
+
+.gooey-btn-container .effect.active::after {
+  animation: button-pop 0.3s ease both;
+}
+
+/* --- DARK MODE STYLING --- */
+.dark .gooey-btn-container .effect.filter {
+  mix-blend-mode: lighten;
+}
+
+.dark .gooey-btn-container .effect.filter::before {
+  background: black;
+}
+
+.dark .gooey-btn-container .effect.filter::after {
+  background: white;
+}
+
+@keyframes button-pop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.particle,
+.point {
+  display: block;
+  opacity: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 100%;
+  transform-origin: center;
+}
+
+.particle {
+  --time: 5s;
+  position: absolute;
+  top: calc(50% - 7px);
+  left: calc(50% - 7px);
+  animation: particle calc(var(--time)) ease 1 -350ms;
+}
+
+.point {
+  background: var(--color);
+  opacity: 1;
+  animation: point calc(var(--time)) ease 1 -350ms;
+}
+
+@keyframes particle {
+  0% {
+    transform: rotate(0deg) translate(calc(var(--start-x)), calc(var(--start-y)));
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+
+  70% {
+    transform: rotate(calc(var(--rotate) * 0.5)) translate(calc(var(--end-x) * 1.2), calc(var(--end-y) * 1.2));
+    opacity: 1;
+    animation-timing-function: ease;
+  }
+
+  85% {
+    transform: rotate(calc(var(--rotate) * 0.66)) translate(calc(var(--end-x)), calc(var(--end-y)));
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(calc(var(--rotate) * 1.2)) translate(calc(var(--end-x) * 0.5), calc(var(--end-y) * 0.5));
+    opacity: 1;
+  }
+}
+
+@keyframes point {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+
+  25% {
+    transform: scale(calc(var(--scale) * 0.25));
+  }
+
+  38% {
+    opacity: 1;
+  }
+
+  65% {
+    transform: scale(var(--scale));
+    opacity: 1;
+    animation-timing-function: ease;
+  }
+
+  85% {
+    transform: scale(var(--scale));
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
