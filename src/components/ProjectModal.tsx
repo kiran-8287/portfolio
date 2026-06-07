@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { technologyLogos } from '../data/portfolio';
+import GooeyButton from './GooeyButton';
 
 interface Project {
     id: string;
@@ -77,18 +78,18 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                     {/* Navigation Buttons */}
                     {project.images.length > 1 && (
                         <>
-                            <button
+                            <GooeyButton
                                 onClick={(e) => { e.stopPropagation(); handlePrevImage(); }}
                                 className="absolute left-4 z-10 p-2 rounded-full bg-white text-black hover:bg-gray-100 transition-all hover:scale-110 shadow-lg"
                             >
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-                            </button>
-                            <button
+                            </GooeyButton>
+                            <GooeyButton
                                 onClick={(e) => { e.stopPropagation(); handleNextImage(); }}
                                 className="absolute right-4 z-10 p-2 rounded-full bg-white text-black hover:bg-gray-100 transition-all hover:scale-110 shadow-lg"
                             >
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                            </button>
+                            </GooeyButton>
                         </>
                     )}
 
@@ -116,12 +117,12 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                 {/* RIGHT SIDE: Content (Scrollable) */}
                 <div className="w-full md:w-[35%] h-full bg-white text-black border-l border-gray-200 flex flex-col relative">
                     {/* Close Button (Mobile pinned / Desktop standard) */}
-                    <button
+                    <GooeyButton
                         onClick={onClose}
                         className="absolute top-4 right-4 z-20 p-2 rounded-full hover:bg-muted transition-colors"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-                    </button>
+                    </GooeyButton>
 
                     <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-8">
                         <div>
@@ -142,7 +143,7 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                         {(project.links.github || project.links.githubLinks || project.links.demo) && (
                             <div className="flex flex-wrap gap-3">
                                 {project.links.github && !project.links.githubLinks && (
-                                    <a
+                                    <GooeyButton
                                         href={project.links.github}
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -154,10 +155,10 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                                             className="w-5 h-5"
                                         />
                                         GitHub
-                                    </a>
+                                    </GooeyButton>
                                 )}
                                 {project.links.githubLinks?.map((link, idx) => (
-                                    <a
+                                    <GooeyButton
                                         key={idx}
                                         href={link.url}
                                         target="_blank"
@@ -170,10 +171,10 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                                             className="w-5 h-5"
                                         />
                                         {link.label}
-                                    </a>
+                                    </GooeyButton>
                                 ))}
                                 {project.links.video && (
-                                    <a
+                                    <GooeyButton
                                         href={project.links.video}
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -181,10 +182,10 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                                     >
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                         Demo Video
-                                    </a>
+                                    </GooeyButton>
                                 )}
                                 {project.links.demo && (
-                                    <a
+                                    <GooeyButton
                                         href={project.links.demo}
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -192,7 +193,7 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                                     >
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                                         <span>Live Demo</span>
-                                    </a>
+                                    </GooeyButton>
                                 )}
                             </div>
                         )}

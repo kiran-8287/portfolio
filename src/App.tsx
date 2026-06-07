@@ -15,6 +15,7 @@ import { Reveal } from './components/Reveal';
 import Preloader from './components/Preloader';
 import { AnimatePresence } from 'framer-motion';
 import ProjectImage from './components/ProjectImage';
+import GooeyButton from './components/GooeyButton';
 
 const PROJECT_ACCENTS: Record<string, string> = {
   'nescafe-iitpkd': '#F59E0B',
@@ -240,12 +241,12 @@ function App() {
 
                           <div className="mt-auto">
                             <Magnetic>
-                              <button
+                              <GooeyButton
                                 onClick={() => handleViewMore(project)}
                                 className="w-full py-2 px-4 rounded-xl font-medium text-sm bg-black text-white hover:shadow-lg hover:opacity-90 transition-all border border-black"
                               >
                                 Explore Project
-                              </button>
+                              </GooeyButton>
                             </Magnetic>
                           </div>
                         </div>
@@ -258,7 +259,7 @@ function App() {
               {/* View More / Show Less Toggle Button */}
               <div className="flex justify-center mt-12">
                 <Magnetic>
-                  <button
+                  <GooeyButton
                     onClick={() => {
                       if (showAllProjects) {
                         setShowAllProjects(false);
@@ -279,7 +280,7 @@ function App() {
                     >
                       {showAllProjects ? '↑' : '→'}
                     </span>
-                  </button>
+                  </GooeyButton>
                 </Magnetic>
               </div>
             </section>

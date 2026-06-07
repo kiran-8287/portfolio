@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import GooeyButton from './GooeyButton';
 
 const BackToTop = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -24,11 +25,11 @@ const BackToTop = () => {
     };
 
     return (
-        <button
+        <GooeyButton
             onClick={scrollToTop}
             className={`fixed bottom-8 right-8 p-3 rounded-full bg-primary text-primary-foreground shadow-lg transition-all duration-300 transform z-40 hover:scale-110 active:scale-95 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
                 }`}
-            aria-label="Back to top"
+            disabled={!isVisible}
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +44,7 @@ const BackToTop = () => {
             >
                 <path d="m18 15-6-6-6 6" />
             </svg>
-        </button>
+        </GooeyButton>
     );
 };
 

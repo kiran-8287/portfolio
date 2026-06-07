@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { FiMail, FiMessageSquare, FiUser } from 'react-icons/fi';
+import GooeyButton from './GooeyButton';
 
 interface ContactFormData {
     fullName: string;
@@ -131,7 +132,7 @@ const ContactSection = () => {
                             />
                         </div>
 
-                        <button
+                        <GooeyButton
                             type="submit"
                             disabled={isSubmitting}
                             className="contact-submit-btn w-full py-4 px-6 rounded-lg font-medium bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
@@ -144,7 +145,7 @@ const ContactSection = () => {
                                     <span aria-hidden="true">→</span>
                                 </>
                             )}
-                        </button>
+                        </GooeyButton>
 
                         {submitStatus === 'success' && (
                             <div className="text-center text-sm text-green-600 dark:text-green-400 animate-in fade-in">

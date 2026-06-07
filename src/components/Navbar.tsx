@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import GooeyNav from './GooeyNav';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -34,12 +35,19 @@ const Navbar = () => {
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center gap-6">
-                    <div className="flex items-center gap-6 text-sm font-medium">
-                        <button onClick={() => scrollToSection('about')} className="hover:text-primary transition-colors">About</button>
-                        <button onClick={() => scrollToSection('experience')} className="hover:text-primary transition-colors">Experience</button>
-                        <button onClick={() => scrollToSection('projects')} className="hover:text-primary transition-colors">Projects</button>
-                        <button onClick={() => scrollToSection('contact')} className="hover:text-primary transition-colors">Contact</button>
-                    </div>
+                    <GooeyNav
+                        items={[
+                            { label: 'About', href: '#about' },
+                            { label: 'Experience', href: '#experience' },
+                            { label: 'Projects', href: '#projects' },
+                            { label: 'Contact', href: '#contact' },
+                        ]}
+                        initialActiveIndex={-1}
+                        onItemClick={(_index, href) => {
+                            const id = href.replace('#', '');
+                            scrollToSection(id);
+                        }}
+                    />
                 </div>
 
                 {/* Mobile Menu Button */}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { portfolioData } from '../data/portfolio';
 import { Reveal } from './Reveal';
+import GooeyButton from './GooeyButton';
 
 const AboutSection = () => {
     const { aboutSection } = portfolioData.personal;
@@ -47,13 +48,13 @@ const AboutSection = () => {
                         ))}
                         {hiddenParagraphs.length > 0 && (
                             <Reveal width="100%">
-                                <button
+                                <GooeyButton
                                     type="button"
                                     onClick={() => setExpanded((prev) => !prev)}
                                     className="text-primary font-medium hover:underline underline-offset-4 transition-colors"
                                 >
                                     {expanded ? 'Read less' : 'Read more...'}
-                                </button>
+                                </GooeyButton>
                             </Reveal>
                         )}
                     </div>
