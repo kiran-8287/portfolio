@@ -216,9 +216,6 @@ const CircularSkills = () => {
                     />
                 ))}
 
-                <div className="skills-orbit-hub absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center text-sm font-bold text-[#534AB7] font-mono tracking-tight z-10">
-                    SKV
-                </div>
 
                 {ORBITS.map((orbit) => (
                     <OrbitRing
