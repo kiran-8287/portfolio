@@ -239,15 +239,47 @@ function App() {
                             ))}
                           </div>
 
-                          <div className="mt-auto">
-                            <Magnetic>
-                              <GooeyButton
-                                onClick={() => handleViewMore(project)}
-                                className="w-full py-2 px-4 rounded-xl font-medium text-sm bg-black text-white hover:shadow-lg hover:opacity-90 transition-all border border-black"
-                              >
-                                Explore Project
-                              </GooeyButton>
-                            </Magnetic>
+                          <div className="mt-auto flex items-center gap-3">
+                            <div className="flex-1">
+                              <Magnetic>
+                                <GooeyButton
+                                  onClick={() => handleViewMore(project)}
+                                  className="w-full py-2 px-4 rounded-xl font-medium text-sm bg-black text-white hover:shadow-lg hover:opacity-90 transition-all border border-black text-center block"
+                                >
+                                  Explore Project
+                                </GooeyButton>
+                              </Magnetic>
+                            </div>
+
+                            {/* Direct Demo & GitHub Links on mobile (since hover overlay is inaccessible on touch screens) */}
+                            <div className="flex gap-2 shrink-0 md:hidden">
+                              {project.links.github && (
+                                <a
+                                  href={project.links.github}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="p-2 bg-secondary/80 hover:bg-secondary rounded-xl border border-border/60 transition-all flex items-center justify-center active:scale-95"
+                                  title="GitHub Repository"
+                                >
+                                  <img
+                                    src={technologyLogos['GitHub']}
+                                    alt="GitHub"
+                                    className="w-5 h-5 dark:invert"
+                                  />
+                                </a>
+                              )}
+                              {project.links.demo && (
+                                <a
+                                  href={project.links.demo}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="p-2 bg-secondary/80 hover:bg-secondary rounded-xl border border-border/60 transition-all flex items-center justify-center active:scale-95"
+                                  title="Live Demo"
+                                >
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-foreground"><path d="M15 3h6v6" /><path d="M10 14 21 3" /><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></svg>
+                                </a>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>

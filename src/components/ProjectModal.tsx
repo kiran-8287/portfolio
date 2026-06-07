@@ -72,24 +72,34 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
 
             {/* Modal Container */}
             <div className="relative w-full max-w-[95vw] h-[85vh] bg-background rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row animate-in fade-in zoom-in-95 duration-300">
+                {/* Global Close Button */}
+                <button
+                    onClick={onClose}
+                    className="absolute top-4 right-4 z-[60] p-2.5 rounded-full text-white bg-black/45 hover:bg-black/60 md:text-black md:bg-transparent md:hover:bg-gray-100 border border-white/10 md:border-transparent transition-all active:scale-90 shadow-md md:shadow-none"
+                    aria-label="Close modal"
+                >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
 
                 {/* LEFT SIDE: Image Gallery (Dark Background) */}
                 <div className="w-full md:w-[65%] h-[40vh] md:h-full bg-black relative flex items-center justify-center p-4">
                     {/* Navigation Buttons */}
                     {project.images.length > 1 && (
                         <>
-                            <GooeyButton
+                            <button
                                 onClick={(e) => { e.stopPropagation(); handlePrevImage(); }}
-                                className="absolute left-4 z-10 p-2 rounded-full bg-white text-black hover:bg-gray-100 transition-all hover:scale-110 shadow-lg"
+                                className="absolute left-4 z-10 p-2.5 rounded-full bg-white/90 hover:bg-white text-black hover:scale-105 transition-all shadow-lg active:scale-95 border border-white/20"
+                                aria-label="Previous image"
                             >
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-                            </GooeyButton>
-                            <GooeyButton
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
+                            </button>
+                            <button
                                 onClick={(e) => { e.stopPropagation(); handleNextImage(); }}
-                                className="absolute right-4 z-10 p-2 rounded-full bg-white text-black hover:bg-gray-100 transition-all hover:scale-110 shadow-lg"
+                                className="absolute right-4 z-10 p-2.5 rounded-full bg-white/90 hover:bg-white text-black hover:scale-105 transition-all shadow-lg active:scale-95 border border-white/20"
+                                aria-label="Next image"
                             >
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                            </GooeyButton>
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
+                            </button>
                         </>
                     )}
 
@@ -115,15 +125,7 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                 </div>
 
                 {/* RIGHT SIDE: Content (Scrollable) */}
-                <div className="w-full md:w-[35%] h-full bg-white text-black border-l border-gray-200 flex flex-col relative">
-                    {/* Close Button (Mobile pinned / Desktop standard) */}
-                    <GooeyButton
-                        onClick={onClose}
-                        className="absolute top-4 right-4 z-20 p-2 rounded-full hover:bg-muted transition-colors"
-                    >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-                    </GooeyButton>
-
+                <div className="w-full md:w-[35%] flex-1 min-h-0 md:h-full bg-white text-black border-l border-gray-200 flex flex-col relative">
                     <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-8">
                         <div>
                             <h2 className="text-3xl font-bold mb-3">{project.name}</h2>

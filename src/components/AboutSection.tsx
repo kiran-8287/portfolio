@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { portfolioData } from '../data/portfolio';
 import { Reveal } from './Reveal';
-import GooeyButton from './GooeyButton';
 
 const AboutSection = () => {
     const { aboutSection } = portfolioData.personal;
@@ -48,13 +47,16 @@ const AboutSection = () => {
                         ))}
                         {hiddenParagraphs.length > 0 && (
                             <Reveal width="100%">
-                                <GooeyButton
+                                <button
                                     type="button"
                                     onClick={() => setExpanded((prev) => !prev)}
-                                    className="text-primary font-medium hover:underline underline-offset-4 transition-colors"
+                                    className="text-primary font-semibold hover:text-primary/80 transition-all duration-300 inline-flex items-center gap-1.5 py-1.5 px-3.5 rounded-full bg-primary/5 hover:bg-primary/10 border border-primary/20 hover:border-primary/45 active:scale-[0.97] text-sm select-none"
                                 >
-                                    {expanded ? 'Read less' : 'Read more...'}
-                                </GooeyButton>
+                                    <span>{expanded ? 'Read less' : 'Read more...'}</span>
+                                    <span className={`inline-block text-xs transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}>
+                                        ▼
+                                    </span>
+                                </button>
                             </Reveal>
                         )}
                     </div>
