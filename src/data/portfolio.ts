@@ -15,6 +15,11 @@ import svelteLogo from '../assets/logos/svelte.svg';
 import resumePdf from '../assets/sai_kiran_resume.pdf';
 import viteLogo from '../assets/logos/vite.svg';
 import profilePicture from '../assets/profile/profile.jpg';
+import iitPkdLogo from '../assets/organizations/iit-pkd.jpg';
+import sriChaitanyaLogo from '../assets/organizations/sri-chaitanya.jpg';
+import davBdlLogo from '../assets/organizations/dav-bdl.png';
+import iacLogo from '../assets/organizations/iac-logo.webp';
+import iarCellLogo from '../assets/organizations/iar-cell.jpg';
 
 // Project images
 // Project 3: Fin Voice images
@@ -149,7 +154,7 @@ export const portfolioData = {
         ],
         badge: {
             label: "Student at IIT Palakkad",
-            icon: "https://ugsufdqwqaiqbawfsxwp.supabase.co/storage/v1/object/public/user-files/de73d95d-9cf7-42f7-85d4-ff56b022be32/education/ce284441-0f30-46e1-9af5-3941df059f55-1768322486224.jpg"
+            icon: iitPkdLogo
         },
         avatar: profilePicture,
     },
@@ -161,7 +166,7 @@ export const portfolioData = {
             location: "Palakkad, India",
             period: "Nov 2024 - Nov 2024",
             description: "Manage the event website and solve problems as they arise. An event that brings together industry leaders, innovators, researchers, and students to interact and explore real-world challenges.",
-            image: "https://ugsufdqwqaiqbawfsxwp.supabase.co/storage/v1/object/public/user-files/de73d95d-9cf7-42f7-85d4-ff56b022be32/experience/28eeb76e-82b6-465f-a285-981d2c4d5418-1768322138098.webp"
+            image: iacLogo
         },
         {
             id: "iar",
@@ -170,7 +175,7 @@ export const portfolioData = {
             location: "Palakkad, India",
             period: "Aug 2024 - Present",
             description: "Developed and maintained the official IAR Cell website to support industry–academia collaboration initiatives. Implemented responsive UI components, improved usability, and resolved real-time issues during updates and events. Contributed to a platform that connects industry partners, researchers, alumni, and students to enable collaborations, internships, and innovation.",
-            image: "https://ugsufdqwqaiqbawfsxwp.supabase.co/storage/v1/object/public/user-files/de73d95d-9cf7-42f7-85d4-ff56b022be32/experience/e368b36f-0e7c-4021-9380-65067f6d0232-1768322383157.jpg"
+            image: iarCellLogo
         }
     ],
     education: [
@@ -181,7 +186,7 @@ export const portfolioData = {
             period: "2024 - 2028",
             location: "Palakkad, India",
             details: "Relevant Coursework: Data Structures & Algorithms, DataBase Management Systems, Object-Oriented Programming (OOP)",
-            image: "https://ugsufdqwqaiqbawfsxwp.supabase.co/storage/v1/object/public/user-files/de73d95d-9cf7-42f7-85d4-ff56b022be32/education/ce284441-0f30-46e1-9af5-3941df059f55-1768322486224.jpg"
+            image: iitPkdLogo
         },
         {
             id: "sri-chaitanya",
@@ -190,7 +195,7 @@ export const portfolioData = {
             period: "2022 - 2024",
             location: "Hyderabad, India",
             details: "XII Boards: 96.9%",
-            image: "https://ugsufdqwqaiqbawfsxwp.supabase.co/storage/v1/object/public/user-files/de73d95d-9cf7-42f7-85d4-ff56b022be32/education/7f0d712f-9dac-4101-a24c-049e841fae3c-1768322517983.png"
+            image: sriChaitanyaLogo
         },
         {
             id: "dav",
@@ -199,7 +204,7 @@ export const portfolioData = {
             period: "2012 - 2022",
             location: "Hyderabad, India",
             details: "X Boards: 92% • GeoMap Quiz: Secured 7th rank among all schools participated from Hyderabad",
-            image: "https://ugsufdqwqaiqbawfsxwp.supabase.co/storage/v1/object/public/user-files/de73d95d-9cf7-42f7-85d4-ff56b022be32/education/4e9a7cf1-12e3-4a04-95e0-55941768398e-1768322753279.png"
+            image: davBdlLogo
         }
     ],
     skills: [
