@@ -1,16 +1,14 @@
 import { portfolioData, technologyLogos } from './data/portfolio';
 import CircularSkills from './components/CircularSkills';
 import AboutSection from './components/AboutSection';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ContactSection from './components/ContactSection';
 import ProjectModal from './components/ProjectModal';
 import HeroSection from './components/HeroSection';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
-import CustomCursor from './components/CustomCursor';
 import MeshBackground from './components/MeshBackground';
-import Magnetic from './components/Magnetic';
 import { Reveal } from './components/Reveal';
 import Preloader from './components/Preloader';
 import { AnimatePresence } from 'framer-motion';
@@ -45,10 +43,6 @@ function App() {
     setTimeout(() => setSelectedProject(null), 300);
   };
 
-  useEffect(() => {
-    // Card tilt logic removed
-  }, []);
-
   return (
     <div className="min-h-screen bg-background text-foreground font-sans transition-colors duration-300 relative">
       <AnimatePresence mode="wait">
@@ -59,7 +53,6 @@ function App() {
 
       {!isLoading && (
         <>
-          <CustomCursor />
           <MeshBackground />
           <Navbar />
           <HeroSection />
@@ -77,20 +70,11 @@ function App() {
               <div className="space-y-6">
                 {experience.map((exp) => (
                   <Reveal width="100%" key={exp.id}>
-                    <div
-                      className="portfolio-card spotlight-card rounded-2xl border bg-card/50 backdrop-blur-md text-card-foreground shadow-sm p-6 hover:shadow-xl transition-all duration-300"
-                      onMouseMove={(e) => {
-                        const rect = e.currentTarget.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-                        e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
-                        e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
-                      }}
-                    >
+                    <div className="rounded-2xl border bg-card/50 backdrop-blur-md text-card-foreground shadow-sm p-6">
                       <div className="relative z-10">
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
                           <div className="flex items-center space-x-4">
-                            <div className="portfolio-card-icon w-12 h-12 bg-muted rounded flex items-center justify-center text-xs overflow-hidden shrink-0">
+                            <div className="w-12 h-12 bg-muted rounded flex items-center justify-center text-xs overflow-hidden shrink-0">
                               {exp.image ? <img src={exp.image} alt={exp.title} className="w-full h-full object-contain" /> : "Logo"}
                             </div>
                             <div>
@@ -126,20 +110,11 @@ function App() {
               <div className="space-y-6">
                 {education.map((edu) => (
                   <Reveal width="100%" key={edu.id}>
-                    <div
-                      className="portfolio-card spotlight-card rounded-2xl border bg-card/50 backdrop-blur-md text-card-foreground shadow-sm p-6 hover:shadow-xl transition-all duration-300"
-                      onMouseMove={(e) => {
-                        const rect = e.currentTarget.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-                        e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
-                        e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
-                      }}
-                    >
+                    <div className="rounded-2xl border bg-card/50 backdrop-blur-md text-card-foreground shadow-sm p-6">
                       <div className="relative z-10">
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
                           <div className="flex items-center space-x-4">
-                            <div className="portfolio-card-icon w-12 h-12 bg-muted rounded flex items-center justify-center text-xs overflow-hidden shrink-0">
+                            <div className="w-12 h-12 bg-muted rounded flex items-center justify-center text-xs overflow-hidden shrink-0">
                               {edu.image ? <img src={edu.image} alt={edu.institution} className="w-full h-full object-contain" /> : "Logo"}
                             </div>
                             <div>
@@ -176,17 +151,10 @@ function App() {
                   return (
                     <Reveal width="100%" key={project.id}>
                       <div
-                        className="project-card spotlight-card h-full rounded-2xl border border-border/60 bg-card/50 backdrop-blur-md text-card-foreground shadow-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+                        className="h-full rounded-2xl border border-border/60 bg-card/50 backdrop-blur-md text-card-foreground shadow-sm overflow-hidden group"
                         style={{
                           borderTopWidth: accentColor ? 3 : undefined,
                           borderTopColor: accentColor,
-                        }}
-                        onMouseMove={(e) => {
-                          const rect = e.currentTarget.getBoundingClientRect();
-                          const x = e.clientX - rect.left;
-                          const y = e.clientY - rect.top;
-                          e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
-                          e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
                         }}
                       >
                         {/* Project Image */}
@@ -241,14 +209,12 @@ function App() {
 
                           <div className="mt-auto flex items-center gap-3">
                             <div className="flex-1">
-                              <Magnetic>
-                                <GooeyButton
-                                  onClick={() => handleViewMore(project)}
-                                  className="w-full py-2 px-4 rounded-xl font-medium text-sm bg-black text-white hover:shadow-lg hover:opacity-90 transition-all border border-black text-center block"
-                                >
-                                  Explore Project
-                                </GooeyButton>
-                              </Magnetic>
+                              <GooeyButton
+                                onClick={() => handleViewMore(project)}
+                                className="w-full py-2 px-4 rounded-xl font-medium text-sm bg-black text-white hover:opacity-90 transition-all border border-black text-center block"
+                              >
+                                Explore Project
+                              </GooeyButton>
                             </div>
 
                             {/* Direct Demo & GitHub Links on mobile (since hover overlay is inaccessible on touch screens) */}
@@ -264,7 +230,7 @@ function App() {
                                   <img
                                     src={technologyLogos['GitHub']}
                                     alt="GitHub"
-                                    className="w-5 h-5 dark:invert"
+                                    className="w-5 h-5"
                                   />
                                 </a>
                               )}
@@ -290,30 +256,23 @@ function App() {
 
               {/* View More / Show Less Toggle Button */}
               <div className="flex justify-center mt-12">
-                <Magnetic>
-                  <GooeyButton
-                    onClick={() => {
-                      if (showAllProjects) {
-                        setShowAllProjects(false);
-                        const element = document.getElementById('projects');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth' });
-                        }
-                      } else {
-                        setShowAllProjects(true);
+                <GooeyButton
+                  onClick={() => {
+                    if (showAllProjects) {
+                      setShowAllProjects(false);
+                      const element = document.getElementById('projects');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
                       }
-                    }}
-                    className="group inline-flex items-center justify-center gap-2 py-3 px-8 rounded-full text-sm font-semibold text-foreground bg-transparent border-2 border-foreground/20 hover:border-foreground/40 hover:bg-foreground/[0.03] active:scale-[0.98] transition-all duration-300"
-                  >
-                    <span>{showAllProjects ? 'Show Less' : 'View All Projects'}</span>
-                    <span
-                      aria-hidden="true"
-                      className={`transition-transform duration-300 ${showAllProjects ? 'group-hover:-translate-y-0.5' : 'group-hover:translate-x-0.5'}`}
-                    >
-                      {showAllProjects ? '↑' : '→'}
-                    </span>
-                  </GooeyButton>
-                </Magnetic>
+                    } else {
+                      setShowAllProjects(true);
+                    }
+                  }}
+                  className="inline-flex items-center justify-center gap-2 py-3 px-8 rounded-full text-sm font-semibold text-foreground bg-transparent border-2 border-foreground/20 hover:border-foreground/40 hover:bg-foreground/[0.03] transition-all duration-300"
+                >
+                  <span>{showAllProjects ? 'Show Less' : 'View All Projects'}</span>
+                  <span aria-hidden="true">{showAllProjects ? '↑' : '→'}</span>
+                </GooeyButton>
               </div>
             </section>
 
