@@ -59,9 +59,12 @@ const Navbar = () => {
         }
     };
 
+    const navSurface = isScrolled
+        ? 'bg-background/80 backdrop-blur-md border-b py-3 shadow-sm'
+        : 'bg-transparent max-md:bg-background/85 max-md:backdrop-blur-md max-md:border-b max-md:border-border/40 py-5 max-md:py-3';
+
     return (
-        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md border-b py-3 shadow-sm' : 'bg-transparent py-5'
-            }`}>
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navSurface}`}>
             <div className="container mx-auto max-w-6xl px-4 flex justify-between items-center">
                 <div
                     className="text-xl font-bold cursor-pointer hover:text-primary transition-colors z-50"
@@ -87,16 +90,27 @@ const Navbar = () => {
                     />
                 </div>
 
-                {/* Mobile Menu Controls */}
-                <div className="md:hidden flex items-center gap-2">
+                {/* Mobile hamburger menu */}
+                <div className="md:hidden flex items-center">
                     <button
-                        className="z-50 p-2 relative flex flex-col justify-center items-center"
+                        type="button"
+                        className="z-50 p-2.5 relative flex h-10 w-10 flex-col items-center justify-center rounded-lg text-foreground hover:bg-foreground/5 transition-colors"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         aria-label="Toggle menu"
+                        aria-expanded={isMobileMenuOpen}
                     >
-                        <div className={`w-6 h-0.5 bg-foreground transition-all duration-300 ${isMobileMenuOpen ? 'translate-y-[8px] rotate-45' : ''}`} />
-                        <div className={`w-6 h-0.5 bg-foreground my-1.5 transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0 scale-x-0' : ''}`} />
-                        <div className={`w-6 h-0.5 bg-foreground transition-all duration-300 ${isMobileMenuOpen ? '-translate-y-[8px] -rotate-45' : ''}`} />
+                        <span
+                            aria-hidden="true"
+                            className={`block h-0.5 w-6 rounded-full bg-current transition-all duration-300 ${isMobileMenuOpen ? 'translate-y-[7px] rotate-45' : ''}`}
+                        />
+                        <span
+                            aria-hidden="true"
+                            className={`my-1.5 block h-0.5 w-6 rounded-full bg-current transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0 scale-x-0' : ''}`}
+                        />
+                        <span
+                            aria-hidden="true"
+                            className={`block h-0.5 w-6 rounded-full bg-current transition-all duration-300 ${isMobileMenuOpen ? '-translate-y-[7px] -rotate-45' : ''}`}
+                        />
                     </button>
                 </div>
             </div>
