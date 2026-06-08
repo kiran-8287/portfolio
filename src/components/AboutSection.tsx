@@ -28,11 +28,7 @@ const AboutSection = () => {
                                 className="w-full h-full object-cover"
                             />
 
-                            {/* Floating Stats on Image (Optional) - kept as it provides context, but removed gradient overlay behind it so might need text shadow or remove if user wants PURE image */}
-                            <div className="absolute bottom-6 left-6 right-6 z-20 text-white drop-shadow-md">
-                                <p className="text-sm font-light opacity-90">{portfolioData.personal.location}</p>
-                                <p className="font-semibold">{portfolioData.personal.title}</p>
-                            </div>
+                            
                         </div>
                     </div>
                 </Reveal>

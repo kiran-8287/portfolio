@@ -75,7 +75,7 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                 {/* Global Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 z-[60] p-2.5 rounded-full text-white bg-black/45 hover:bg-black/60 md:text-foreground md:bg-transparent md:hover:bg-muted border border-white/10 md:border-transparent transition-all active:scale-90 shadow-md md:shadow-none cursor-pointer"
+                    className="absolute top-4 right-4 z-[60] p-2.5 rounded-full text-black bg-white/90 hover:bg-white border-2 border-gray-300 hover:border-gray-500 transition-all active:scale-90 shadow-md cursor-pointer"
                     aria-label="Close modal"
                 >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
@@ -125,7 +125,7 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                 </div>
 
                 {/* RIGHT SIDE: Content (Scrollable) */}
-                <div className="w-full md:w-[35%] flex-1 min-h-0 md:h-full bg-card text-card-foreground border-t md:border-t-0 md:border-l border-border/60 flex flex-col relative">
+                <div className="w-full md:w-[35%] flex-1 min-h-0 md:h-full bg-white text-card-foreground border-t md:border-t-0 md:border-l border-border/60 flex flex-col dark:text-gray-900 relative">
                     <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-8">
                         <div>
                             <h2 className="text-3xl font-bold mb-3">{project.name}</h2>
@@ -149,7 +149,7 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                                         href={project.links.github}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors shadow-sm"
+                                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-800 font-medium transition-all shadow-sm hover:shadow-md"
                                     >
                                         <img
                                             src={technologyLogos['GitHub']}
@@ -165,7 +165,7 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                                         href={link.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors shadow-sm"
+                                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-800 font-medium transition-all shadow-sm hover:shadow-md"
                                     >
                                         <img
                                             src={technologyLogos['GitHub']}
