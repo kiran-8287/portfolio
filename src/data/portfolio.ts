@@ -304,7 +304,7 @@ export const portfolioData = {
             status: "completed",
             links: {
                 github: "https://github.com/kiran-8287/FUTURE_FS_01",
-                demo: "https://kirann-portfolio.netlify.app/"
+                demo: "https://kirann-portfolio.vercel.app/"
             }
         },
         {
