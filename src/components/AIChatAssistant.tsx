@@ -11,8 +11,7 @@ import {
   FiCopy,
   FiCheck,
   FiTerminal,
-  FiUser,
-  FiCornerDownLeft
+  FiUser
 } from 'react-icons/fi';
 import { portfolioData } from '../data/portfolio';
 import robotVideo from '../assets/robot.mp4';
@@ -193,13 +192,12 @@ export default function AIChatAssistant() {
     }
 
     // API Health Check
-    fetch('http://localhost:5000/api/health')
+    fetch('/api/health')
       .then(res => res.json())
       .then(data => {
         setApiHealthCheck(data.apiConfigured);
       })
       .catch(() => {
-        // Assume simulation if backend is not started/configured
         setApiHealthCheck(false);
       });
 
@@ -382,7 +380,7 @@ export default function AIChatAssistant() {
       setMessages(prev => [...prev, initialBotMessage]);
       setIsTyping(false);
 
-      const response = await fetch('http://localhost:5000/api/chat', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -485,10 +483,10 @@ export default function AIChatAssistant() {
   return (
     <>
       {/* Floating Action Button */}
-      <div className="fixed bottom-6 right-6 z-40">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40">
         <button
           onClick={() => setIsOpen(true)}
-          className="relative group w-14 h-14 rounded-full bg-gradient-to-tr from-sky-500 via-blue-500 to-cyan-400 p-[1px] flex items-center justify-center cursor-pointer shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 z-40 orb-btn-glow fab-breathe"
+          className="relative group w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-sky-500 via-blue-500 to-cyan-400 p-[1px] flex items-center justify-center cursor-pointer shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 z-40 orb-btn-glow fab-breathe"
           aria-label="Open chat with Kiran"
         >
           <div className="w-full h-full rounded-full bg-slate-950 flex items-center justify-center transition-all duration-300 group-hover:bg-slate-900 overflow-hidden">
@@ -503,7 +501,7 @@ export default function AIChatAssistant() {
           </div>
 
           {/* Tooltip */}
-          <span className="absolute right-16 bg-slate-950/90 text-white text-[11px] font-mono tracking-wider font-semibold py-1.5 px-3 rounded-lg border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 select-none whitespace-nowrap shadow-xl">
+          <span className="hidden sm:inline-block absolute right-16 bg-slate-950/90 text-white text-[11px] font-mono tracking-wider font-semibold py-1.5 px-3 rounded-lg border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 select-none whitespace-nowrap shadow-xl">
             Hey, I'm Kiran 👋
           </span>
         </button>
@@ -527,7 +525,7 @@ export default function AIChatAssistant() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 26, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-full sm:w-[480px] z-50 glass-panel shadow-2xl flex flex-col overflow-hidden text-white border-l border-white/10"
+              className="fixed top-0 right-0 h-[100dvh] w-full sm:w-[480px] z-50 glass-panel shadow-2xl flex flex-col overflow-hidden text-white border-l border-white/10"
             >
               {/* Floating particles background effect */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
@@ -539,7 +537,7 @@ export default function AIChatAssistant() {
               </div>
 
               {/* Chat Header */}
-              <div className="relative p-4 border-b border-white/10 flex items-center justify-between bg-black/30 backdrop-blur-md z-10">
+              <div className="relative p-3 sm:p-4 border-b border-white/10 flex items-center justify-between bg-black/30 backdrop-blur-md z-10">
                 <div className="flex items-center gap-3">
                   <KiranAvatar size="sm" />
                   <div>
@@ -597,11 +595,11 @@ export default function AIChatAssistant() {
               </div>
 
               {/* Chat Content Body */}
-              <div className="flex-1 overflow-y-auto p-5 space-y-6 ai-chat-scrollbar relative z-10 bg-slate-950/20">
+              <div className="flex-1 overflow-y-auto p-3.5 sm:p-5 space-y-4 sm:space-y-6 ai-chat-scrollbar relative z-10 bg-slate-950/20">
                 {messages.length === 0 ? (
                   /* Landing State */
-                  <div className="h-full flex flex-col items-center justify-center text-center px-2 py-8">
-                    <div className="relative w-24 h-24 mb-6 flex items-center justify-center rounded-full overflow-hidden border border-white/10 bg-slate-950 shadow-lg">
+                  <div className="h-full flex flex-col items-center justify-center text-center px-2 py-4 sm:py-8">
+                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 mb-4 sm:mb-6 flex items-center justify-center rounded-full overflow-hidden border border-white/10 bg-slate-950 shadow-lg shrink-0">
                       <video
                         src={robotVideo}
                         autoPlay
@@ -612,15 +610,15 @@ export default function AIChatAssistant() {
                       />
                     </div>
 
-                    <h2 className="text-2xl font-extrabold tracking-tight text-white mb-2">
+                    <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white mb-1.5 sm:mb-2">
                       Hey, I'm Kiran 👋
                     </h2>
-                    <p className="text-zinc-400 text-sm max-w-sm mb-7 leading-relaxed font-sans">
+                    <p className="text-zinc-400 text-[13px] sm:text-sm max-w-sm mb-4 sm:mb-7 leading-relaxed font-sans">
                       This is an interactive AI chat. Ask me anything about my projects, skills, or experience, or let me navigate the site for you!
                     </p>
 
                     {/* Quick Command System Guide */}
-                    <div className="w-full max-w-sm rounded-xl border border-white/5 bg-white/[0.02] p-3.5 mb-7 text-left glass-card">
+                    <div className="w-full max-w-sm rounded-xl border border-white/5 bg-white/[0.02] p-3 sm:p-3.5 mb-4 sm:mb-7 text-left glass-card">
                       <div className="flex items-center gap-2 mb-2 text-sky-400 font-mono text-[10px] uppercase font-bold tracking-wider">
                         <FiTerminal className="w-3 h-3" />
                         <span>Quick commands</span>
@@ -628,7 +626,7 @@ export default function AIChatAssistant() {
                       <p className="text-[11px] text-zinc-400 font-sans leading-normal mb-2.5">
                         Type any of these to jump straight there:
                       </p>
-                      <div className="grid grid-cols-3 gap-1.5 font-mono text-[10px] text-zinc-300">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 font-mono text-[10px] text-zinc-300">
                         <span className="px-2 py-1 rounded-md bg-black/40 border border-white/5">/projects</span>
                         <span className="px-2 py-1 rounded-md bg-black/40 border border-white/5">/skills</span>
                         <span className="px-2 py-1 rounded-md bg-black/40 border border-white/5">/experience</span>
@@ -727,7 +725,7 @@ export default function AIChatAssistant() {
                   e.preventDefault();
                   handleSendMessage(inputValue);
                 }}
-                className="relative p-4 border-t border-white/10 bg-black/40 backdrop-blur-md flex gap-2 items-center z-10"
+                className="relative p-3 sm:p-4 border-t border-white/10 bg-black/40 backdrop-blur-md flex gap-2 items-center z-10"
               >
                 {/* Voice Mode Toggle (Mic) */}
                 <button
@@ -753,14 +751,8 @@ export default function AIChatAssistant() {
                         : 'Type /help or ask me anything...'
                     }
                     disabled={isListening}
-                    className="w-full py-3 pl-4 pr-10 rounded-xl text-sm font-sans focus:outline-none transition-all disabled:opacity-50 glass-input"
+                    className="w-full py-3 pl-4 pr-4 rounded-xl text-sm font-sans focus:outline-none transition-all disabled:opacity-50 glass-input"
                   />
-
-                  {/* Shortcut Indicator Enter button icon */}
-                  <span className="absolute right-3.5 top-3.5 text-[9px] font-mono text-zinc-500 border border-zinc-700/60 px-1 rounded flex items-center gap-0.5 select-none pointer-events-none">
-                    <span>Enter</span>
-                    <FiCornerDownLeft className="w-2 h-2" />
-                  </span>
                 </div>
 
                 <button
