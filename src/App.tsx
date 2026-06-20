@@ -14,6 +14,7 @@ import Preloader from './components/Preloader';
 import { AnimatePresence } from 'framer-motion';
 import ProjectImage from './components/ProjectImage';
 import GooeyButton from './components/GooeyButton';
+import AIChatAssistant from './components/AIChatAssistant';
 
 const PROJECT_ACCENTS: Record<string, string> = {
   'nescafe-iitpkd': '#F59E0B',
@@ -292,6 +293,7 @@ function App() {
             onClose={handleCloseModal}
           />
 
+          <AIChatAssistant />
           <Footer />
           <BackToTop />
         </>

@@ -192,7 +192,7 @@ const LEGEND = [
 
 const CircularSkills = () => {
     return (
-        <section className="min-h-screen bg-transparent flex items-center justify-center px-4 md:px-8 py-16 flex-col">
+        <section id="skills" className="min-h-screen bg-transparent flex items-center justify-center px-4 md:px-8 py-16 flex-col scroll-mt-20">
             <div className="text-center mb-10">
                 <p className="font-mono text-xs text-gray-400 mb-1.5 tracking-widest">
                     {'// the tools I actually use'}
