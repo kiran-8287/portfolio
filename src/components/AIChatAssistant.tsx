@@ -1,22 +1,22 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FiX, 
-  FiSend, 
-  FiMic, 
-  FiMicOff, 
-  FiVolume2, 
-  FiVolumeX, 
-  FiTrash2, 
-  FiDownload, 
-  FiCopy, 
+import {
+  FiX,
+  FiSend,
+  FiMic,
+  FiVolume2,
+  FiVolumeX,
+  FiTrash2,
+  FiDownload,
+  FiCopy,
   FiCheck,
   FiTerminal,
   FiUser,
   FiCornerDownLeft
 } from 'react-icons/fi';
-import { TbRobot } from 'react-icons/tb';
 import { portfolioData } from '../data/portfolio';
+import robotVideo from '../assets/robot.mp4';
+import robotImg from '../assets/robot.png';
 import './AIChatAssistant.css';
 
 // Type definitions
@@ -27,13 +27,12 @@ type Message = {
   timestamp: Date;
 };
 
-// Small reusable avatar: the React robot icon
+// Small reusable avatar: the robot image
 function KiranAvatar({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
   const dims = size === 'lg' ? 'w-20 h-20' : size === 'md' ? 'w-9 h-9' : 'w-8 h-8';
-  const iconSize = size === 'lg' ? 'w-10 h-10 text-white' : size === 'md' ? 'w-5 h-5 text-white' : 'w-4 h-4 text-white';
   return (
-    <div className={`${dims} rounded-2xl cursor-avatar flex items-center justify-center shrink-0 shadow-sm`}>
-      <TbRobot className={iconSize} />
+    <div className={`${dims} rounded-2xl cursor-avatar flex items-center justify-center shrink-0 shadow-sm overflow-hidden bg-white`}>
+      <img src={robotImg} alt="Kiran AI" className="w-full h-full object-cover" />
     </div>
   );
 }
@@ -81,7 +80,7 @@ function renderFormattedText(text: string) {
     }
     if (token.startsWith('`') && token.endsWith('`')) {
       return (
-        <code key={index} className="px-1.5 py-0.5 rounded bg-white/15 font-mono text-xs text-purple-300 border border-white/10">
+        <code key={index} className="px-1.5 py-0.5 rounded bg-white/15 font-mono text-xs text-sky-300 border border-white/10">
           {token.slice(1, -1)}
         </code>
       );
@@ -135,8 +134,7 @@ export default function AIChatAssistant() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [isVoiceActive, setIsVoiceActive] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [isListening, setIsListening] = useState(false);
   const [aiStatus, setAiStatus] = useState<'online' | 'thinking' | 'speaking' | 'listening'>('online');
   const [apiHealthCheck, setApiHealthCheck] = useState(true);
@@ -189,9 +187,6 @@ export default function AIChatAssistant() {
 
       rec.onend = () => {
         setIsListening(false);
-        if (isVoiceActive && aiStatus === 'listening') {
-          setAiStatus('online');
-        }
       };
 
       recognitionRef.current = rec;
@@ -246,8 +241,8 @@ export default function AIChatAssistant() {
     // Find a premium English voice if possible
     const voices = window.speechSynthesis.getVoices();
     const englishVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('Google')) ||
-                          voices.find(v => v.lang.startsWith('en')) || 
-                          voices[0];
+      voices.find(v => v.lang.startsWith('en')) ||
+      voices[0];
     if (englishVoice) utterance.voice = englishVoice;
 
     utterance.onstart = () => {
@@ -256,16 +251,6 @@ export default function AIChatAssistant() {
 
     utterance.onend = () => {
       setAiStatus('online');
-      // If voice conversation mode is enabled, auto-start microphone to listen for reply
-      if (isVoiceActive && recognitionRef.current) {
-        setTimeout(() => {
-          try {
-            recognitionRef.current.start();
-          } catch (e) {
-            console.error('Microphone failed to restart', e);
-          }
-        }, 600);
-      }
     };
 
     utterance.onerror = () => {
@@ -273,28 +258,6 @@ export default function AIChatAssistant() {
     };
 
     window.speechSynthesis.speak(utterance);
-  };
-
-  // Stop synthesis and listening when toggling voice mode off
-  const toggleVoiceMode = () => {
-    const nextVal = !isVoiceActive;
-    setIsVoiceActive(nextVal);
-    
-    if (!nextVal) {
-      window.speechSynthesis?.cancel();
-      try {
-        recognitionRef.current?.stop();
-      } catch (e) {}
-      setIsListening(false);
-      setAiStatus('online');
-    } else {
-      // Starting voice mode: immediately trigger listening if not typing
-      if (!isTyping && recognitionRef.current) {
-        try {
-          recognitionRef.current.start();
-        } catch (e) {}
-      }
-    }
   };
 
   const toggleMute = () => {
@@ -313,20 +276,20 @@ export default function AIChatAssistant() {
     if (isListening) {
       try {
         recognitionRef.current.stop();
-      } catch (e) {}
+      } catch (e) { }
     } else {
       // Cancel speech before listening
       window.speechSynthesis?.cancel();
       try {
         recognitionRef.current.start();
-      } catch (e) {}
+      } catch (e) { }
     }
   };
 
   // Navigates the portfolio sections smoothly
   const executeNavigationCommand = (section: string) => {
     const target = section.toLowerCase();
-    
+
     if (target === 'resume') {
       window.open(portfolioData.personal.links.resume, '_blank');
       return;
@@ -376,7 +339,7 @@ export default function AIChatAssistant() {
     if (isCommand) {
       const commandName = textToSend.substring(1).trim().toLowerCase();
       const validCommands = ['projects', 'skills', 'resume', 'github', 'contact', 'experience'];
-      
+
       if (validCommands.includes(commandName)) {
         setTimeout(() => {
           const confirmationText = `Executing system command: **/${commandName}**... Scrolling you to my ${commandName} section! [NAVIGATE:${commandName}]`;
@@ -389,14 +352,12 @@ export default function AIChatAssistant() {
           setMessages(prev => [...prev, botMessage]);
           setIsTyping(false);
           setAiStatus('online');
-          
+
           // Trigger the scroll/nav
           executeNavigationCommand(commandName);
 
           // Voice speak confirmation
-          if (isVoiceActive) {
-            speakResponse(`Navigating to ${commandName}`);
-          }
+          speakResponse(`Navigating to ${commandName}`);
         }, 600);
         return;
       }
@@ -452,7 +413,7 @@ export default function AIChatAssistant() {
         botResponseAccumulator += chunkText;
 
         // Update the active model message in real-time
-        setMessages(prev => 
+        setMessages(prev =>
           prev.map(m => m.id === botMessageId ? { ...m, text: botResponseAccumulator } : m)
         );
       }
@@ -464,9 +425,7 @@ export default function AIChatAssistant() {
       }
 
       // Voice read the completed response
-      if (isVoiceActive) {
-        speakResponse(botResponseAccumulator);
-      }
+      speakResponse(botResponseAccumulator);
 
     } catch (error) {
       console.error('Error fetching stream response:', error);
@@ -487,7 +446,7 @@ export default function AIChatAssistant() {
 
   const handleDownloadChat = () => {
     if (messages.length === 0) return;
-    
+
     const formattedChat = messages.map(m => {
       const sender = m.role === 'user' ? 'USER' : 'AI KIRAN';
       const cleanMsg = m.text.replace(/\[NAVIGATE:\w+\]/g, '').trim();
@@ -519,9 +478,9 @@ export default function AIChatAssistant() {
 
   const statusLabel =
     aiStatus === 'thinking' ? 'thinking it through…' :
-    aiStatus === 'speaking' ? 'talking…' :
-    aiStatus === 'listening' ? 'listening…' :
-    (apiHealthCheck ? 'awake & building' : 'simulation mode');
+      aiStatus === 'speaking' ? 'talking…' :
+        aiStatus === 'listening' ? 'listening…' :
+          (apiHealthCheck ? 'awake & building' : 'simulation mode');
 
   return (
     <>
@@ -529,16 +488,20 @@ export default function AIChatAssistant() {
       <div className="fixed bottom-6 right-6 z-40">
         <button
           onClick={() => setIsOpen(true)}
-          className="relative group w-14 h-14 rounded-full bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 p-[1px] flex items-center justify-center cursor-pointer shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 z-40 orb-btn-glow fab-breathe"
+          className="relative group w-14 h-14 rounded-full bg-gradient-to-tr from-sky-500 via-blue-500 to-cyan-400 p-[1px] flex items-center justify-center cursor-pointer shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 z-40 orb-btn-glow fab-breathe"
           aria-label="Open chat with Kiran"
         >
-          <div className="w-full h-full rounded-full bg-slate-950 flex items-center justify-center transition-all duration-300 group-hover:bg-slate-900">
-            <TbRobot className="w-6 h-6 text-white transition-transform group-hover:scale-110" />
+          <div className="w-full h-full rounded-full bg-slate-950 flex items-center justify-center transition-all duration-300 group-hover:bg-slate-900 overflow-hidden">
+            <video
+              src={robotVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover scale-110 rounded-full"
+            />
           </div>
-          
-          {/* Status dot */}
-          <span className="absolute top-0 right-0 block h-3.5 w-3.5 rounded-full bg-teal-400 ring-2 ring-slate-950 status-dot-ring" />
-          
+
           {/* Tooltip */}
           <span className="absolute right-16 bg-slate-950/90 text-white text-[11px] font-mono tracking-wider font-semibold py-1.5 px-3 rounded-lg border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 select-none whitespace-nowrap shadow-xl">
             Hey, I'm Kiran 👋
@@ -582,7 +545,6 @@ export default function AIChatAssistant() {
                   <div>
                     <h3 className="text-sm font-bold tracking-tight text-white flex items-center gap-1.5">
                       Kiran
-                      <span className="inline-flex h-1.5 w-1.5 rounded-full bg-teal-400" />
                     </h3>
                     <p className="text-[11px] text-zinc-400 font-mono tracking-wide">
                       {statusLabel}
@@ -623,15 +585,6 @@ export default function AIChatAssistant() {
                     {isMuted ? <FiVolumeX className="w-4 h-4" /> : <FiVolume2 className="w-4 h-4" />}
                   </button>
 
-                  {/* Continuous Voice Conversation Toggle */}
-                  <button
-                    onClick={toggleVoiceMode}
-                    className={`p-2 rounded-lg hover:bg-white/5 transition-all cursor-pointer ${isVoiceActive ? 'text-indigo-400 bg-indigo-500/10' : 'text-zinc-400 hover:text-white'}`}
-                    title={isVoiceActive ? "Disable Hands-free Voice Mode" : "Enable Hands-free Voice Mode"}
-                  >
-                    {isVoiceActive ? <FiMic className="w-4 h-4" /> : <FiMicOff className="w-4 h-4" />}
-                  </button>
-
                   {/* Close button */}
                   <button
                     onClick={() => setIsOpen(false)}
@@ -648,21 +601,27 @@ export default function AIChatAssistant() {
                 {messages.length === 0 ? (
                   /* Landing State */
                   <div className="h-full flex flex-col items-center justify-center text-center px-2 py-8">
-                    <div className="relative w-24 h-24 mb-6 flex items-center justify-center">
-                      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 opacity-25 blur-xl orb-glow" />
-                      <KiranAvatar size="lg" />
+                    <div className="relative w-24 h-24 mb-6 flex items-center justify-center rounded-full overflow-hidden border border-white/10 bg-slate-950 shadow-lg">
+                      <video
+                        src={robotVideo}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover scale-110"
+                      />
                     </div>
 
                     <h2 className="text-2xl font-extrabold tracking-tight text-white mb-2">
                       Hey, I'm Kiran 👋
                     </h2>
                     <p className="text-zinc-400 text-sm max-w-sm mb-7 leading-relaxed font-sans">
-                      2nd-year Data Science student at IIT Palakkad, currently deep in something I'll explain badly until I'm three sentences in and suddenly very excited. Ask about my projects, my stack, or what a 2 AM bug looks like — I can scroll you around the site too.
+                      This is an interactive AI chat. Ask me anything about my projects, skills, or experience, or let me navigate the site for you!
                     </p>
 
                     {/* Quick Command System Guide */}
                     <div className="w-full max-w-sm rounded-xl border border-white/5 bg-white/[0.02] p-3.5 mb-7 text-left glass-card">
-                      <div className="flex items-center gap-2 mb-2 text-violet-400 font-mono text-[10px] uppercase font-bold tracking-wider">
+                      <div className="flex items-center gap-2 mb-2 text-sky-400 font-mono text-[10px] uppercase font-bold tracking-wider">
                         <FiTerminal className="w-3 h-3" />
                         <span>Quick commands</span>
                       </div>
@@ -696,7 +655,7 @@ export default function AIChatAssistant() {
                           <button
                             key={i}
                             onClick={() => handleChipClick(prompt)}
-                            className="text-xs text-left bg-white/[0.03] border border-white/5 hover:border-violet-500 hover:bg-violet-500/10 active:scale-95 text-zinc-300 hover:text-white px-3 py-2 rounded-xl transition-all cursor-pointer font-sans"
+                            className="text-xs text-left bg-white/[0.03] border border-white/5 hover:border-sky-400 hover:bg-sky-400/10 active:scale-95 text-zinc-300 hover:text-white px-3 py-2 rounded-xl transition-all cursor-pointer font-sans"
                           >
                             {prompt}
                           </button>
@@ -717,11 +676,10 @@ export default function AIChatAssistant() {
                           {!isUser && <KiranAvatar size="md" />}
 
                           <div
-                            className={`max-w-[82%] px-4 py-3 rounded-2xl border text-sm shadow-lg leading-relaxed ${
-                              isUser
-                                ? 'bg-gradient-to-tr from-indigo-600/90 to-purple-600/90 text-white border-indigo-500/30 rounded-tr-sm font-sans'
+                            className={`max-w-[82%] px-4 py-3 rounded-2xl border text-sm shadow-lg leading-relaxed ${isUser
+                                ? 'bg-gradient-to-tr from-sky-600/90 to-blue-600/90 text-white border-sky-400/30 rounded-tr-sm font-sans'
                                 : 'bg-white/[0.03] border-white/5 rounded-tl-sm glass-card'
-                            }`}
+                              }`}
                           >
                             {isUser ? (
                               <p className="whitespace-pre-wrap font-sans text-zinc-100">{message.text}</p>
@@ -762,39 +720,6 @@ export default function AIChatAssistant() {
                 )}
               </div>
 
-              {/* Speech State Feedback Bar (Only visible when active in voice conversation) */}
-              {isVoiceActive && (
-                <div className="relative z-10 bg-black/40 border-t border-white/5 py-2.5 px-4 flex items-center justify-between text-xs text-zinc-400">
-                  <div className="flex items-center gap-2">
-                    {/* Animated waves when speaking or listening */}
-                    {(aiStatus === 'listening' || aiStatus === 'speaking') ? (
-                      <div className="flex items-center gap-0.5 h-5">
-                        <div className="voice-wave-bar" />
-                        <div className="voice-wave-bar" />
-                        <div className="voice-wave-bar" />
-                        <div className="voice-wave-bar" />
-                        <div className="voice-wave-bar" />
-                      </div>
-                    ) : (
-                      <span className="w-1.5 h-1.5 rounded-full bg-zinc-600" />
-                    )}
-                    <span className="font-mono text-[10px] tracking-wider uppercase font-semibold">
-                      {aiStatus === 'listening' && "Listening to you…"}
-                      {aiStatus === 'speaking' && "Kiran is talking…"}
-                      {aiStatus === 'online' && "Voice mode idle"}
-                      {aiStatus === 'thinking' && "Thinking…"}
-                    </span>
-                  </div>
-                  {isListening && (
-                    <button 
-                      onClick={handleMicClick}
-                      className="px-2 py-0.5 text-[9px] uppercase tracking-wider font-mono text-zinc-400 bg-white/5 border border-white/10 rounded hover:text-white cursor-pointer"
-                    >
-                      Stop
-                    </button>
-                  )}
-                </div>
-              )}
 
               {/* Chat Input Area Form */}
               <form
@@ -808,11 +733,10 @@ export default function AIChatAssistant() {
                 <button
                   type="button"
                   onClick={handleMicClick}
-                  className={`p-3 rounded-xl border flex items-center justify-center transition-all cursor-pointer ${
-                    isListening 
+                  className={`p-3 rounded-xl border flex items-center justify-center transition-all cursor-pointer ${isListening
                       ? 'bg-rose-500/20 text-rose-400 border-rose-500/40 animate-pulse'
                       : 'bg-white/[0.03] text-zinc-400 border-white/5 hover:text-white hover:border-white/20'
-                  }`}
+                    }`}
                   title="Speech to Text"
                 >
                   <FiMic className="w-4 h-4" />
@@ -831,7 +755,7 @@ export default function AIChatAssistant() {
                     disabled={isListening}
                     className="w-full py-3 pl-4 pr-10 rounded-xl text-sm font-sans focus:outline-none transition-all disabled:opacity-50 glass-input"
                   />
-                  
+
                   {/* Shortcut Indicator Enter button icon */}
                   <span className="absolute right-3.5 top-3.5 text-[9px] font-mono text-zinc-500 border border-zinc-700/60 px-1 rounded flex items-center gap-0.5 select-none pointer-events-none">
                     <span>Enter</span>
@@ -842,7 +766,7 @@ export default function AIChatAssistant() {
                 <button
                   type="submit"
                   disabled={!inputValue.trim() || isTyping || isListening}
-                  className="p-3 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white flex items-center justify-center transition-all active:scale-95 disabled:opacity-40 disabled:scale-100 disabled:pointer-events-none cursor-pointer shadow-lg"
+                  className="p-3 rounded-xl bg-gradient-to-tr from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white flex items-center justify-center transition-all active:scale-95 disabled:opacity-40 disabled:scale-100 disabled:pointer-events-none cursor-pointer shadow-lg"
                   title="Send Message"
                 >
                   <FiSend className="w-4 h-4" />

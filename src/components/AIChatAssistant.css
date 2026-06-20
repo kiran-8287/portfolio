@@ -1,17 +1,17 @@
-/* AIChatAssistant.css */
+/* AIChatAssistant.css — light-blue / sky theme */
 
-/* Custom Animations */
+/* ── Keyframes ───────────────────────────────────────────── */
 @keyframes orbPulse {
   0% {
-    box-shadow: 0 0 15px rgba(99, 102, 241, 0.4), 0 0 30px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.4), 0 0 30px rgba(56, 189, 248, 0.2);
     transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 25px rgba(99, 102, 241, 0.7), 0 0 50px rgba(99, 102, 241, 0.4), 0 0 20px rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.7), 0 0 50px rgba(56, 189, 248, 0.4), 0 0 20px rgba(14, 165, 233, 0.5);
     transform: scale(1.05);
   }
   100% {
-    box-shadow: 0 0 15px rgba(99, 102, 241, 0.4), 0 0 30px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.4), 0 0 30px rgba(56, 189, 248, 0.2);
     transform: scale(1);
   }
 }
@@ -19,11 +19,11 @@
 @keyframes orbBreathe {
   0%, 100% {
     transform: scale(1);
-    filter: drop-shadow(0 0 15px rgba(124, 58, 237, 0.5)) drop-shadow(0 0 30px rgba(59, 130, 246, 0.3));
+    filter: drop-shadow(0 0 15px rgba(14, 165, 233, 0.5)) drop-shadow(0 0 30px rgba(56, 189, 248, 0.3));
   }
   50% {
     transform: scale(1.12);
-    filter: drop-shadow(0 0 30px rgba(124, 58, 237, 0.8)) drop-shadow(0 0 50px rgba(59, 130, 246, 0.6)) drop-shadow(0 0 15px rgba(236, 72, 153, 0.4));
+    filter: drop-shadow(0 0 30px rgba(14, 165, 233, 0.8)) drop-shadow(0 0 50px rgba(56, 189, 248, 0.6)) drop-shadow(0 0 15px rgba(125, 211, 252, 0.4));
   }
 }
 
@@ -32,12 +32,8 @@
     transform: translateY(0px) translateX(0px);
     opacity: 0;
   }
-  10% {
-    opacity: 0.6;
-  }
-  90% {
-    opacity: 0.6;
-  }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
   100% {
     transform: translateY(-80px) translateX(15px);
     opacity: 0;
@@ -45,108 +41,83 @@
 }
 
 @keyframes voiceWave {
-  0%, 100% {
-    height: 6px;
-  }
-  50% {
-    height: 28px;
-  }
+  0%, 100% { height: 6px; }
+  50%       { height: 28px; }
 }
 
 @keyframes dotFlashing {
-  0% {
-    background-color: rgba(255, 255, 255, 1);
-  }
-  50%, 100% {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
+  0%       { background-color: rgba(255, 255, 255, 1); }
+  50%, 100% { background-color: rgba(255, 255, 255, 0.2); }
 }
 
-/* Scrollbar styling */
-.ai-chat-scrollbar::-webkit-scrollbar {
-  width: 5px;
-}
+/* ── Scrollbar ───────────────────────────────────────────── */
+.ai-chat-scrollbar::-webkit-scrollbar       { width: 5px; }
+.ai-chat-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); border-radius: 10px; }
+.ai-chat-scrollbar::-webkit-scrollbar-thumb { background: rgba(56,189,248,0.15); border-radius: 10px; }
+.ai-chat-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(56,189,248,0.28); }
 
-.ai-chat-scrollbar::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 10px;
-}
-
-.ai-chat-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-}
-
-.ai-chat-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* Glassmorphism drawer styles */
+/* ── Glassmorphism ───────────────────────────────────────── */
 .glass-panel {
   background: rgba(10, 10, 12, 0.75);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.08);
 }
 
 .glass-card {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(56, 189, 248, 0.07);
 }
 
 .glass-input {
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.12);
+  color: white;
 }
 
 .glass-input:focus {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(99, 102, 241, 0.5);
-  box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+  background: rgba(56, 189, 248, 0.05);
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.18);
 }
 
-/* Animated Orb */
-.orb-glow {
-  animation: orbBreathe 6s ease-in-out infinite;
-}
+/* ── Animated orb ────────────────────────────────────────── */
+.orb-glow    { animation: orbBreathe 6s ease-in-out infinite; }
+.orb-btn-glow { animation: orbPulse 3s infinite; }
 
-.orb-btn-glow {
-  animation: orbPulse 3s infinite;
-}
-
-/* Floating Particles wrapper */
+/* ── Floating Particles ──────────────────────────────────── */
 .particle {
   position: absolute;
   bottom: 0;
   width: 4px;
   height: 4px;
-  background: rgba(99, 102, 241, 0.5);
+  background: rgba(56, 189, 248, 0.45);
   border-radius: 50%;
   pointer-events: none;
 }
 
 .particle:nth-child(1) { left: 10%; animation: floatParticles 8s infinite 1s; }
-.particle:nth-child(2) { left: 30%; animation: floatParticles 6s infinite 3s; width: 6px; height: 6px; background: rgba(139, 92, 246, 0.4); }
+.particle:nth-child(2) { left: 30%; animation: floatParticles 6s infinite 3s; width: 6px; height: 6px; background: rgba(14, 165, 233, 0.35); }
 .particle:nth-child(3) { left: 50%; animation: floatParticles 7s infinite 0s; }
-.particle:nth-child(4) { left: 70%; animation: floatParticles 9s infinite 4s; width: 5px; height: 5px; background: rgba(236, 72, 153, 0.3); }
+.particle:nth-child(4) { left: 70%; animation: floatParticles 9s infinite 4s; width: 5px; height: 5px; background: rgba(125, 211, 252, 0.3); }
 .particle:nth-child(5) { left: 90%; animation: floatParticles 5s infinite 2s; }
 
-/* Voice Waves */
+/* ── Voice Waves ─────────────────────────────────────────── */
 .voice-wave-bar {
   width: 4px;
-  background-color: #8b5cf6;
+  background-color: #38bdf8;
   border-radius: 4px;
   animation: voiceWave 1s ease-in-out infinite;
 }
 
-.voice-wave-bar:nth-child(2) { animation-delay: 0.1s; background-color: #6366f1; }
-.voice-wave-bar:nth-child(3) { animation-delay: 0.2s; background-color: #ec4899; }
-.voice-wave-bar:nth-child(4) { animation-delay: 0.3s; background-color: #6366f1; }
-.voice-wave-bar:nth-child(5) { animation-delay: 0.4s; background-color: #8b5cf6; }
+.voice-wave-bar:nth-child(2) { animation-delay: 0.1s; background-color: #0ea5e9; }
+.voice-wave-bar:nth-child(3) { animation-delay: 0.2s; background-color: #7dd3fc; }
+.voice-wave-bar:nth-child(4) { animation-delay: 0.3s; background-color: #0ea5e9; }
+.voice-wave-bar:nth-child(5) { animation-delay: 0.4s; background-color: #38bdf8; }
 
-/* Thinking loading dots */
+/* ── Typing Dots ─────────────────────────────────────────── */
 .dot-flashing {
   position: relative;
   width: 6px;
@@ -158,7 +129,8 @@
   animation-delay: 0.5s;
 }
 
-.dot-flashing::before, .dot-flashing::after {
+.dot-flashing::before,
+.dot-flashing::after {
   content: "";
   display: inline-block;
   position: absolute;
@@ -187,21 +159,18 @@
   animation-delay: 1s;
 }
 
-/* Glowing text */
-.glow-text-primary {
-  text-shadow: 0 0 12px rgba(99, 102, 241, 0.6);
-}
-.glow-text-purple {
-  text-shadow: 0 0 12px rgba(139, 92, 246, 0.6);
-}
+/* ── Glow text ───────────────────────────────────────────── */
+.glow-text-primary { text-shadow: 0 0 12px rgba(56, 189, 248, 0.65); }
+.glow-text-blue    { text-shadow: 0 0 12px rgba(14, 165, 233, 0.65); }
 
+/* ── Avatar ──────────────────────────────────────────────── */
 @keyframes cursorBlink {
   0%, 45% { opacity: 1; }
   46%, 100% { opacity: 0; }
 }
 
 .cursor-avatar {
-  background: linear-gradient(155deg, #7c3aed 0%, #6d28d9 100%);
+  background: #ffffff;
 }
 
 .cursor-glyph {
@@ -210,6 +179,7 @@
   animation: cursorBlink 1.15s steps(1) infinite;
 }
 
+/* ── Terminal code block ─────────────────────────────────── */
 .terminal-block {
   background: #0f172a;
   border: 1px solid rgb(51 65 85 / 0.6);
@@ -218,4 +188,9 @@
 .terminal-block-header {
   background: rgb(30 41 59 / 0.6);
   border-bottom: 1px solid rgb(51 65 85 / 0.5);
+}
+
+/* ── FAB breathe ring ────────────────────────────────────── */
+.fab-breathe {
+  animation: orbPulse 3s ease-in-out infinite;
 }
