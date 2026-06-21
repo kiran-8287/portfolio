@@ -162,7 +162,8 @@ export default async function handler(req, res) {
     res.end();
   } catch (error) {
     console.error('Gemini API error:', error);
-    res.write("Ah, hit an error talking to my AI core. Try again in a bit?");
+    const errorMsg = error.message || String(error);
+    res.write(`Ah, hit an error talking to my AI core: ${errorMsg}. Try again in a bit?`);
     res.end();
   }
 }
