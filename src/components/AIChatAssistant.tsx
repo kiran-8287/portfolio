@@ -228,9 +228,24 @@ export default function AIChatAssistant() {
   };
 
   const toggleMute = () => {
-    setIsMuted(!isMuted);
-    if (!isMuted) {
+    const nextMuted = !isMuted;
+    setIsMuted(nextMuted);
+    if (nextMuted) {
       window.speechSynthesis?.cancel();
+    } else {
+      // Unmuting: trigger a confirmation message to unlock/prime speech synthesis on mobile browsers
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance("Voice assistant active");
+        u.rate = 1.1;
+        u.pitch = 1.0;
+        const voices = window.speechSynthesis.getVoices();
+        const englishVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('Google')) ||
+          voices.find(v => v.lang.startsWith('en')) ||
+          voices[0];
+        if (englishVoice) u.voice = englishVoice;
+        window.speechSynthesis.speak(u);
+      }
     }
   };
 
@@ -342,6 +357,15 @@ export default function AIChatAssistant() {
 
     // Cancel speech synthesizer on new send
     window.speechSynthesis?.cancel();
+
+    // Prime speech synthesis inside user gesture path to keep it unlocked for async responses on mobile
+    if (!isMuted && window.speechSynthesis) {
+      try {
+        const prime = new SpeechSynthesisUtterance('');
+        prime.volume = 0;
+        window.speechSynthesis.speak(prime);
+      } catch (e) {}
+    }
 
     // If it's a command, handle it locally first
     if (isCommand) {
