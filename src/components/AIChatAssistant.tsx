@@ -633,15 +633,8 @@ export default function AIChatAssistant() {
                 {messages.length === 0 ? (
                   /* Landing State */
                   <div className="h-full flex flex-col items-center justify-center text-center px-2 py-4 sm:py-8">
-                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 mb-4 sm:mb-6 flex items-center justify-center rounded-full overflow-hidden border border-white/10 bg-slate-950 shadow-lg shrink-0">
-                      <video
-                        src={robotVideo}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="w-full h-full object-cover scale-110"
-                      />
+                    <div className="w-20 h-20 sm:w-24 sm:h-24 mb-4 sm:mb-6 rounded-2xl flex items-center justify-center shadow-md overflow-hidden bg-white shrink-0">
+                      <img src={robotImg} alt="Kiran AI" className="w-full h-full object-cover" />
                     </div>
 
                     <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white mb-1.5 sm:mb-2">
