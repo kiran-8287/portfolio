@@ -118,15 +118,15 @@ export const portfolioData = {
         aboutSection: {
             title: "About Me",
             description: [
-                "I'm Sai Kiran — 2nd year B.Tech Data Science at IIT Palakkad (CGPA: 8.38). I build full-stack apps, AI-powered tools, and whatever idea won't leave me alone at 2 AM.",
-                "So far that's meant: a Hospital Management System with automated PostgreSQL billing and real-time room tracking, a 2D interior design platform with CAD-like tools and live cost estimation, a campus ordering system with Supabase Realtime and Razorpay, and FinVoice — a voice-first AI banking assistant built with the Gemini Live API that understands English, Hindi, and Telugu. All from scratch. All full-stack.",
+                "I'm Sai Kiran, a 2nd year B.Tech Data Science student at IIT Palakkad (CGPA: 8.38). I build full-stack apps, AI-powered tools, and whatever idea won't leave me alone at 2 AM.",
+                "So far that's meant: a Hospital Management System with automated PostgreSQL billing and real-time room tracking, a 2D interior design platform with CAD-like tools and live cost estimation, a campus ordering system with Supabase Realtime and Razorpay, and FinVoice: a voice-first AI banking assistant built with the Gemini Live API that understands English, Hindi, and Telugu. All from scratch. All full-stack.",
                 "I lead the tech team at IAR Cell, building a platform that serves 2,000+ alumni. I've competed at India's largest agentic AI hackathon. I've solved 230+ LeetCode problems in C++ and I'm the kind of person who gets stuck on a bug for 3 hours, sleeps on it, fixes it in 10 minutes the next morning, and feels unreasonably happy about it.",
                 "Curious about everything — tech, design, games, how things work, why things break. Always building something. Open to SWE internships in 2026."
             ],
             stats: [
                 { label: "Experience", value: "1+ Years" },
                 { label: "Projects", value: "6+" },
-                { label: "LeetCode", value: "230+" }
+                { label: "LeetCode", value: "240+" }
             ],
             profileImage: profilePicture
         },
