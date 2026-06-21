@@ -35,7 +35,7 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model_id: 'sonic-english',
+        model_id: 'sonic-3.5',
         transcript: text,
         voice: {
           mode: 'id',
