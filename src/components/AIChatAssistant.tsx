@@ -158,38 +158,7 @@ export default function AIChatAssistant() {
       }
     }
 
-    // Initialize Web Speech API Speech Recognition
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (SpeechRecognition) {
-      const rec = new SpeechRecognition();
-      rec.continuous = false;
-      rec.interimResults = false;
-      rec.lang = 'en-US';
-
-      rec.onstart = () => {
-        setIsListening(true);
-        setAiStatus('listening');
-      };
-
-      rec.onresult = (event: any) => {
-        const transcript = event.results[0][0].transcript;
-        if (transcript.trim()) {
-          handleSendMessage(transcript);
-        }
-      };
-
-      rec.onerror = (event: any) => {
-        console.error('Speech recognition error:', event.error);
-        setIsListening(false);
-        setAiStatus('online');
-      };
-
-      rec.onend = () => {
-        setIsListening(false);
-      };
-
-      recognitionRef.current = rec;
-    }
+    // Web Speech API will be initialized on-demand inside the click handler to comply with mobile security policies.
 
     // API Health Check
     fetch('/api/health')
@@ -266,21 +235,62 @@ export default function AIChatAssistant() {
   };
 
   const handleMicClick = () => {
-    if (!recognitionRef.current) {
-      alert("Speech recognition is not supported in this browser. Try Chrome, Edge, or Safari.");
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("Speech recognition is not supported in this browser. Try using Chrome, Safari, or Edge.");
       return;
     }
 
     if (isListening) {
       try {
-        recognitionRef.current.stop();
+        recognitionRef.current?.stop();
       } catch (e) { }
-    } else {
-      // Cancel speech before listening
-      window.speechSynthesis?.cancel();
-      try {
-        recognitionRef.current.start();
-      } catch (e) { }
+      setIsListening(false);
+      setAiStatus('online');
+      return;
+    }
+
+    // Cancel speech before listening
+    window.speechSynthesis?.cancel();
+
+    try {
+      const rec = new SpeechRecognition();
+      rec.continuous = false;
+      rec.interimResults = false;
+      rec.lang = 'en-US';
+
+      rec.onstart = () => {
+        setIsListening(true);
+        setAiStatus('listening');
+      };
+
+      rec.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        if (transcript.trim()) {
+          handleSendMessage(transcript);
+        }
+      };
+
+      rec.onerror = (event: any) => {
+        console.error('Speech recognition error:', event.error);
+        setIsListening(false);
+        setAiStatus('online');
+        if (event.error === 'not-allowed') {
+          alert("Microphone access is blocked or denied. Please enable it in your browser settings.");
+        }
+      };
+
+      rec.onend = () => {
+        setIsListening(false);
+        setAiStatus('online');
+      };
+
+      recognitionRef.current = rec;
+      rec.start();
+    } catch (e) {
+      console.error('Speech recognition failed to start:', e);
+      setIsListening(false);
+      setAiStatus('online');
     }
   };
 
