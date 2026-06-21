@@ -175,10 +175,10 @@ export default function AIChatAssistant() {
       // Cancel speech on unmount
       window.speechSynthesis?.cancel();
       if (activeSourceRef.current) {
-        try { activeSourceRef.current.stop(); } catch (e) {}
+        try { activeSourceRef.current.stop(); } catch {}
       }
       if (audioContextRef.current) {
-        try { audioContextRef.current.close(); } catch (e) {}
+        try { audioContextRef.current.close(); } catch {}
       }
     };
   }, []);
@@ -200,7 +200,7 @@ export default function AIChatAssistant() {
 
     // Stop current playing audio source
     if (activeSourceRef.current) {
-      try { activeSourceRef.current.stop(); } catch (e) {}
+      try { activeSourceRef.current.stop(); } catch {}
       activeSourceRef.current = null;
     }
 
@@ -258,7 +258,7 @@ export default function AIChatAssistant() {
 
             // Stop again in case another audio source started during decoding
             if (activeSourceRef.current) {
-              try { activeSourceRef.current.stop(); } catch (e) {}
+              try { activeSourceRef.current.stop(); } catch {}
             }
 
             const source = ctx.createBufferSource();
@@ -294,7 +294,7 @@ export default function AIChatAssistant() {
 
     if (nextMuted) {
       if (activeSourceRef.current) {
-        try { activeSourceRef.current.stop(); } catch (e) {}
+        try { activeSourceRef.current.stop(); } catch {}
         activeSourceRef.current = null;
       }
       window.speechSynthesis?.cancel();
@@ -325,7 +325,7 @@ export default function AIChatAssistant() {
     if (isListening) {
       try {
         recognitionRef.current?.stop();
-      } catch (e) { }
+      } catch {}
       setIsListening(false);
       setAiStatus('online');
       return;
@@ -333,7 +333,7 @@ export default function AIChatAssistant() {
 
     // Cancel speech and voice playback before listening
     if (activeSourceRef.current) {
-      try { activeSourceRef.current.stop(); } catch (e) {}
+      try { activeSourceRef.current.stop(); } catch {}
       activeSourceRef.current = null;
     }
     window.speechSynthesis?.cancel();
@@ -342,7 +342,7 @@ export default function AIChatAssistant() {
     if (audioContextRef.current && audioContextRef.current.state === 'running') {
       try {
         audioContextRef.current.suspend();
-      } catch (e) {}
+      } catch {}
     }
 
     try {
@@ -436,7 +436,7 @@ export default function AIChatAssistant() {
 
     // Cancel any active TTS audio on new send
     if (activeSourceRef.current) {
-      try { activeSourceRef.current.stop(); } catch (e) {}
+      try { activeSourceRef.current.stop(); } catch {}
       activeSourceRef.current = null;
     }
     window.speechSynthesis?.cancel();
@@ -585,7 +585,7 @@ export default function AIChatAssistant() {
   const handleClearChat = () => {
     if (window.confirm("Are you sure you want to clear the conversation history?")) {
       if (activeSourceRef.current) {
-        try { activeSourceRef.current.stop(); } catch (e) {}
+        try { activeSourceRef.current.stop(); } catch {}
         activeSourceRef.current = null;
       }
       window.speechSynthesis?.cancel();
