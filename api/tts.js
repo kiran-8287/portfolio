@@ -18,7 +18,13 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Text is required' });
   }
 
-  const apiKey = process.env.CARTESIA_API_KEY || 'CARTESIA_API_KEY_REDACTED';
+  const apiKey = process.env.CARTESIA_API_KEY;
+
+  if (!apiKey) {
+    console.error('CARTESIA_API_KEY is not configured');
+    return res.status(500).json({ error: 'TTS service not configured' });
+  }
+
 
   try {
     const response = await fetch('https://api.cartesia.ai/tts/bytes', {
