@@ -140,7 +140,7 @@ export default function AIChatAssistant() {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
-  const speechUtteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Initialize Speech Recognition & Memory
   useEffect(() => {
@@ -173,6 +173,9 @@ export default function AIChatAssistant() {
     return () => {
       // Cancel speech on unmount
       window.speechSynthesis?.cancel();
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
     };
   }, []);
 
@@ -187,65 +190,130 @@ export default function AIChatAssistant() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Handle auto-listening loop in Voice mode
+  // Handle auto-listening loop in Voice mode using Cartesia TTS
   const speakResponse = (text: string) => {
-    if (isMuted || !window.speechSynthesis) return;
+    if (isMuted) return;
 
-    // Cancel current speech
-    window.speechSynthesis.cancel();
+    if (!audioRef.current) {
+      audioRef.current = new Audio();
+    }
 
-    // Strip out tags like [NAVIGATE:...] and markdown signs before speaking
+    // Stop current playing audio
+    audioRef.current.pause();
+
     const cleanText = text
       .replace(/\[NAVIGATE:\w+\]/g, '')
       .replace(/[*`#_]/g, '')
       .trim();
 
-    const utterance = new SpeechSynthesisUtterance(cleanText);
-    utterance.rate = 1.0;
-    utterance.pitch = 1.0;
-    speechUtteranceRef.current = utterance;
+    if (!cleanText) return;
 
-    // Find a premium English voice if possible
-    const voices = window.speechSynthesis.getVoices();
-    const englishVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('Google')) ||
-      voices.find(v => v.lang.startsWith('en')) ||
-      voices[0];
-    if (englishVoice) utterance.voice = englishVoice;
+    setAiStatus('speaking');
 
-    utterance.onstart = () => {
-      setAiStatus('speaking');
-    };
+    fetch('/api/tts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ text: cleanText })
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('TTS failed');
+        return res.blob();
+      })
+      .then(blob => {
+        if (isMuted) {
+          setAiStatus('online');
+          return;
+        }
+        const url = URL.createObjectURL(blob);
+        if (audioRef.current) {
+          audioRef.current.src = url;
+          audioRef.current.play()
+            .then(() => {
+              setAiStatus('speaking');
+            })
+            .catch(err => {
+              console.error('Audio play error:', err);
+              setAiStatus('online');
+            });
 
-    utterance.onend = () => {
-      setAiStatus('online');
-    };
+          audioRef.current.onended = () => {
+            setAiStatus('online');
+            URL.revokeObjectURL(url);
+          };
 
-    utterance.onerror = () => {
-      setAiStatus('online');
-    };
-
-    window.speechSynthesis.speak(utterance);
+          audioRef.current.onerror = () => {
+            setAiStatus('online');
+            URL.revokeObjectURL(url);
+          };
+        }
+      })
+      .catch(err => {
+        console.error('TTS fetch failed:', err);
+        setAiStatus('online');
+      });
   };
 
   const toggleMute = () => {
     const nextMuted = !isMuted;
     setIsMuted(nextMuted);
+
+    if (!audioRef.current) {
+      audioRef.current = new Audio();
+    }
+
     if (nextMuted) {
+      audioRef.current.pause();
       window.speechSynthesis?.cancel();
     } else {
-      // Unmuting: trigger a confirmation message to unlock/prime speech synthesis on mobile browsers
-      if (window.speechSynthesis) {
-        window.speechSynthesis.cancel();
-        const u = new SpeechSynthesisUtterance("Voice assistant active");
-        u.rate = 1.1;
-        u.pitch = 1.0;
-        const voices = window.speechSynthesis.getVoices();
-        const englishVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('Google')) ||
-          voices.find(v => v.lang.startsWith('en')) ||
-          voices[0];
-        if (englishVoice) u.voice = englishVoice;
-        window.speechSynthesis.speak(u);
-      }
+      // Unmuting: trigger a confirmation message using Cartesia to unlock/prime audio on mobile
+      setAiStatus('speaking');
+
+      // Synchronously prime the audio element to bypass iOS Safari restrictions
+      audioRef.current.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAAA';
+      audioRef.current.play()
+        .then(() => {
+          fetch('/api/tts', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text: "Voice assistant active" })
+          })
+            .then(res => {
+              if (!res.ok) throw new Error('TTS failed');
+              return res.blob();
+            })
+            .then(blob => {
+              if (isMuted) { // user muted while fetching
+                setAiStatus('online');
+                return;
+              }
+              const url = URL.createObjectURL(blob);
+              if (audioRef.current) {
+                audioRef.current.src = url;
+                audioRef.current.play()
+                  .then(() => {
+                    setAiStatus('speaking');
+                  })
+                  .catch(e => console.error(e));
+
+                audioRef.current.onended = () => {
+                  setAiStatus('online');
+                  URL.revokeObjectURL(url);
+                };
+              }
+            })
+            .catch(err => {
+              console.error(err);
+              setAiStatus('online');
+            });
+        })
+        .catch(err => {
+          console.error('Audio unlock failed:', err);
+          setAiStatus('online');
+        });
     }
   };
 
@@ -355,16 +423,29 @@ export default function AIChatAssistant() {
     setIsTyping(true);
     setAiStatus('thinking');
 
-    // Cancel speech synthesizer on new send
+    // Cancel any active TTS audio on new send
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
     window.speechSynthesis?.cancel();
 
-    // Prime speech synthesis inside user gesture path to keep it unlocked for async responses on mobile
-    if (!isMuted && window.speechSynthesis) {
+    // Prime speech synthesis & HTML5 Audio inside user gesture path to keep it unlocked for async responses on mobile
+    if (!isMuted) {
+      if (!audioRef.current) {
+        audioRef.current = new Audio();
+      }
       try {
-        const prime = new SpeechSynthesisUtterance('');
-        prime.volume = 0;
-        window.speechSynthesis.speak(prime);
+        audioRef.current.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAAA';
+        audioRef.current.play().catch(() => {});
       } catch (e) {}
+
+      if (window.speechSynthesis) {
+        try {
+          const prime = new SpeechSynthesisUtterance('');
+          prime.volume = 0;
+          window.speechSynthesis.speak(prime);
+        } catch (e) {}
+      }
     }
 
     // If it's a command, handle it locally first
@@ -496,6 +577,9 @@ export default function AIChatAssistant() {
 
   const handleClearChat = () => {
     if (window.confirm("Are you sure you want to clear the conversation history?")) {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
       window.speechSynthesis?.cancel();
       setMessages([]);
       localStorage.removeItem('ai_kiran_chat_history');
