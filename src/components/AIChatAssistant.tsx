@@ -367,10 +367,22 @@ export default function AIChatAssistant() {
         console.error('Speech recognition error:', event.error);
         setIsListening(false);
         setAiStatus('online');
-        if (event.error === 'not-allowed') {
+        
+        const error = event.error;
+        if (error === 'no-speech' || error === 'aborted') {
+          return;
+        }
+
+        if (error === 'not-allowed') {
           alert("Microphone access is blocked or denied. Please enable microphone permissions in your browser/device settings.");
-        } else if (event.error !== 'no-speech') {
-          alert(`Speech recognition error: ${event.error}. Note: iOS Chrome/Firefox do not support the Web Speech API. Please try using mobile Safari.`);
+        } else if (error === 'network') {
+          alert("Speech recognition failed: Network connection lost. Please check your internet connection and try again.");
+        } else if (error === 'audio-capture') {
+          alert("No microphone detected. Please check that your microphone is connected and try again.");
+        } else if (error === 'service-not-allowed') {
+          alert("Speech recognition is blocked by browser policy or system security settings.");
+        } else {
+          alert(`Speech recognition error: ${error}. Please try again.`);
         }
       };
 
