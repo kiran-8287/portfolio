@@ -68,7 +68,7 @@ const HeroSection = () => {
                 <div className="space-y-6">
                     <Reveal width="100%">
                         <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight">
-                            Hi, I'm <span className="text-[#87CEEB]">{personal.name.split(' ').slice(0, 2).join(' ')}</span> 👋
+                            Hi, I'm <span className="text-[#87CEEB]">{personal.name.split(' ').slice(0, 2).join(' ')}</span> :)
                         </h1>
                     </Reveal>
 

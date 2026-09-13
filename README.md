@@ -1,6 +1,6 @@
 # 🌌 Hey, I'm Sai Kiran 👋
 
-I'm a 2nd year B.Tech Data Science student at **IIT Palakkad**. My CGPA is **8.38**—it compiles fine, just a few warnings I choose to pretend aren't there. I build full-stack web applications, voice-enabled AI tools, and whatever random idea refuses to leave me alone at 2 AM. 
+I'm a 3rd year B.Tech Data Science & Engineering student at **IIT Palakkad**. My CGPA is **8.2**—it compiles fine, just a few warnings I choose to pretend aren't there. I've interned as an **SDE at Vehant Technologies** building X-ray data pipelines and synthetic scan systems. I build full-stack web applications, voice-enabled AI tools, and whatever random idea refuses to leave me alone at 2 AM. 
 
 * 🔭 **Current hyperfocus**: AI integrations and fast system architectures.
 * 🌱 **Default runtime dependency**: Hyderabad Biryani & strong coffee.
@@ -42,11 +42,11 @@ If you click the floating robot avatar on the bottom right, you can chat directl
 
 ## 🛠️ The Toolkit
 
-* **Languages**: C++ (240+ LeetCode problems solved; can reverse a linked list under pressure), Python, JavaScript, TypeScript
+* **Languages**: C++ (270+ LeetCode problems solved; can reverse a linked list under pressure), Python, JavaScript, TypeScript, SQL
 * **Frontend**: React 19, Svelte, Vite, Tailwind CSS, Framer Motion, GSAP, CSS3/HTML5
-* **Backend & DB**: Node.js, Express, PostgreSQL, Supabase (Realtime, RLS), Dexie.js (Offline cache)
-* **APIs & Voice**: Gemini API, Cartesia TTS API, Web Speech API, Web Audio API
-* **Tools**: Git, GitHub, VS Code, Vercel
+* **Backend & DB**: Node.js, Express, PostgreSQL, Supabase (Realtime, RLS), Firebase, Data Pipelines, Dexie.js (Offline cache)
+* **APIs & Voice**: Gemini API, Prompt Engineering, LLM Integration, Cartesia TTS API, Web Speech API, Web Audio API
+* **Tools**: Git, GitHub, Docker, VS Code, Vercel
 
 ---
 

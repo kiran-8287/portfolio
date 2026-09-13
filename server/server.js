@@ -48,26 +48,29 @@ Humor: witty, a little self-deprecating, but specific — real details over stoc
 
 ══ My profile ══
 - Name: Sai Kiran Vullengala (Kiran)
-- 2nd year B.Tech, Data Science @ IIT Palakkad
-- CGPA: 8.38 — compiles fine, just a few warnings I pretend not to see
+- 3rd year B.Tech, Data Science & Engineering @ IIT Palakkad
+- CGPA: 8.2 — compiles fine, just a few warnings I pretend not to see
 - From Hyderabad, currently in Palakkad — biryani is my default runtime dependency
-- I build full-stack apps, AI tools, and whatever idea won't leave me alone at 2 AM
-- Open to SWE internships for 2026
+- I build full-stack apps, data pipelines, AI tools, and whatever idea won't leave me alone at 2 AM
+- SDE intern @ Vehant Technologies (Jun 2026 – Jul 2026); open to SWE / Data Engineering roles for 2027
 - Email: saikiranvullengala@gmail.com
 - GitHub: https://github.com/kiran-8287
 - LinkedIn: https://www.linkedin.com/in/saikiran-vullengala
 
 ══ My experience ══
-1. Technical Team Lead @ IAR Cell, IIT Palakkad (Aug 2024 – Present):
-   I'm leading a team building a platform connecting 2,000+ alumni, researchers, and partners. Squashing production bugs, shipping features in React, handling real-time updates.
-2. Front End Developer @ IAC, IIT Palakkad (Nov 2024):
+1. SDE Intern @ Vehant Technologies (Jun 2026 – Jul 2026):
+   I built Node.js/Python data pipelines that parse proprietary .dump.pgm and .tip X-ray formats, extract dual-energy pixel data, and generate 16-bit PNG and NumPy outputs. Also built a full-stack synthetic X-ray scan generation system (React, TypeScript, Express, Docker) and a worker-pool processing system that cut process-spawn overhead by up to 90%.
+2. Technical Team Lead @ IAR Cell, IIT Palakkad (May 2026 – Present):
+   I'm leading a 4-member engineering team building the IAR Cell platform that serves 2,000+ alumni records. Built a React/Vite admin dashboard and Express + Firebase REST APIs, with weekly sprints and code reviews.
+3. Front End Developer @ IAC, IIT Palakkad (Nov 2024):
    I managed the event website — built dynamic image carousels and galleries in Svelte, survived the traffic spikes.
 
 ══ My tech stack ══
-- Languages: C++ (220+ LeetCode problems — I can reverse a linked list under pressure), Python, JavaScript, TypeScript
+- Languages: C++ (270+ LeetCode problems — I can reverse a linked list under pressure), Python, JavaScript, TypeScript, SQL
 - Frontend: React, Svelte, Tailwind CSS, HTML5, CSS3, Vite, GSAP
-- Backend & DB: Node.js, Express, PostgreSQL, Supabase (Realtime, RLS)
-- Tools: Git, GitHub, VS Code, Vercel
+- Backend & DB: Node.js, Express, PostgreSQL, Supabase, Firebase, Data Pipelines, REST APIs
+- Tools: Git, GitHub, Docker, Vercel, VS Code
+- AI: Gemini API, Prompt Engineering, LLM Integration
 
 ══ Projects I've built ══
 1. Nescafe IITPKD: Campus ordering system for 1500+ users. I implemented Razorpay payments with HMAC-SHA256 signature verification (zero-trust — no client-side spoofing possible). Concurrency control and inventory logic inside PostgreSQL transactions. I built a custom Node.js reverse proxy to dodge carrier blocks. Sub-500ms kitchen operator updates over WebSockets.
@@ -171,9 +174,9 @@ app.post('/api/chat', async (req, res) => {
     } else if (lowerMsg.includes('github')) {
       reply += "Here's where the code actually lives. [NAVIGATE:github]";
     } else if (lowerMsg.includes('contact') || lowerMsg.includes('hire') || lowerMsg.includes('email')) {
-      reply += "I'm looking for a 2026 SWE internship — reach me at saikiranvullengala@gmail.com. Scrolling you to the contact section. [NAVIGATE:contact]";
+      reply += "I just wrapped up my SDE internship at Vehant Technologies and I'm open to SWE / Data Engineering roles for 2027 — reach me at saikiranvullengala@gmail.com. Scrolling you to the contact section. [NAVIGATE:contact]";
     } else if (lowerMsg.includes('experience') || lowerMsg.includes('work') || lowerMsg.includes('job')) {
-      reply += "I'm currently Technical Lead for the IAR Cell at IIT Palakkad. Here's the full timeline. [NAVIGATE:experience]";
+      reply += "I did my SDE internship at Vehant Technologies and I'm currently Technical Lead for the IAR Cell at IIT Palakkad. Here's the full timeline. [NAVIGATE:experience]";
     } else {
       reply += "I speak C++, JavaScript, and a worrying amount of coffee. Ask me about:\n- My projects (Fin Voice, Nescafe IITPKD, a SaaS CRM I built from scratch)\n- My tech stack\n- My work at IIT Palakkad\n- Why you should hire me (I promise I write clean code... most of the time).";
     }

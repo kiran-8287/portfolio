@@ -12,7 +12,7 @@ import linkedinLogo from '../assets/logos/linkedin.svg';
 import mailLogo from '../assets/logos/mail.svg';
 import resumeLogo from '../assets/logos/resume.png';
 import svelteLogo from '../assets/logos/svelte.svg';
-import resumePdf from '../assets/sai_kiran_resume.pdf';
+import resumePdf from '../assets/saikiran_resume.pdf';
 import viteLogo from '../assets/logos/vite.svg';
 import profilePicture from '../assets/profile/profile.jpg';
 import iitPkdLogo from '../assets/organizations/iit-pkd.jpg';
@@ -20,6 +20,7 @@ import sriChaitanyaLogo from '../assets/organizations/sri-chaitanya.jpg';
 import davBdlLogo from '../assets/organizations/dav-bdl.png';
 import iacLogo from '../assets/organizations/iac-logo.webp';
 import iarCellLogo from '../assets/organizations/iar-cell.jpg';
+import vehantLogo from '../assets/organizations/vehant.webp';
 
 // Project images
 // Project 3: Fin Voice images
@@ -114,19 +115,19 @@ export const portfolioData = {
         title: "Full-stack dev. Occasional bug whisperer.",
         location: "IIT Palakkad, India",
         email: "saikiranvullengala@gmail.com",
-        about: "I'm Sai Kiran — 2nd year B.Tech Data Science at IIT Palakkad (CGPA: 8.38). I build full-stack apps, AI-powered tools, and whatever idea won't leave me alone at 2 AM.",
+        about: "I'm Sai Kiran — 3rd year B.Tech Data Science & Engineering at IIT Palakkad (CGPA: 8.2). I've interned as an SDE at Vehant Technologies, and I build full-stack apps, data pipelines, AI-powered tools, and whatever idea won't leave me alone at 2 AM.",
         aboutSection: {
             title: "About Me",
             description: [
-                "I'm Sai Kiran, a 2nd year B.Tech Data Science student at IIT Palakkad (CGPA: 8.38). I build full-stack apps, AI-powered tools, and whatever idea won't leave me alone at 2 AM.",
-                "So far that's meant: a Hospital Management System with automated PostgreSQL billing and real-time room tracking, a 2D interior design platform with CAD-like tools and live cost estimation, a campus ordering system with Supabase Realtime and Razorpay, and FinVoice: a voice-first AI banking assistant built with the Gemini Live API that understands English, Hindi, and Telugu. All from scratch. All full-stack.",
-                "I lead the tech team at IAR Cell, building a platform that serves 2,000+ alumni. I've competed at India's largest agentic AI hackathon. I've solved 230+ LeetCode problems in C++ and I'm the kind of person who gets stuck on a bug for 3 hours, sleeps on it, fixes it in 10 minutes the next morning, and feels unreasonably happy about it.",
-                "Curious about everything — tech, design, games, how things work, why things break. Always building something. Open to SWE internships in 2026."
+                "I'm Sai Kiran, a 3rd year B.Tech Data Science & Engineering student at IIT Palakkad (CGPA: 8.2). I build full-stack apps, data pipelines, AI-powered tools, and whatever idea won't leave me alone at 2 AM.",
+                "So far that's meant: an SDE internship at Vehant Technologies where I built X-ray data pipelines and a synthetic scan generation system, plus a Hospital Management System with automated PostgreSQL billing and real-time room tracking, a 2D interior design platform with CAD-like tools and live cost estimation, a campus ordering system with Supabase Realtime and Razorpay, and FinVoice: a voice-first AI banking assistant built with the Gemini Live API that understands English, Hindi, and Telugu. All from scratch. All full-stack.",
+                "I lead the tech team at IAR Cell, building a platform that serves 2,000+ alumni. I've competed at India's largest agentic AI hackathon. I've solved 270+ LeetCode problems in C++ and I'm the kind of person who gets stuck on a bug for 3 hours, sleeps on it, fixes it in 10 minutes the next morning, and feels unreasonably happy about it.",
+                "Curious about everything — tech, design, data, how things work, why things break. Always building something. Open to SWE / Data Engineering opportunities in 2027."
             ],
             stats: [
-                { label: "Experience", value: "1+ Years" },
+                { label: "Experience", value: "2+ Years" },
                 { label: "Projects", value: "6+" },
-                { label: "LeetCode", value: "240+" }
+                { label: "LeetCode", value: "270+" }
             ],
             profileImage: profilePicture
         },
@@ -160,6 +161,24 @@ export const portfolioData = {
     },
     experience: [
         {
+            id: "vehant",
+            title: "Vehant Technologies",
+            role: "SDE Intern",
+            location: "India",
+            period: "Jun 2026 - Jul 2026",
+            description: "Built and debugged a Node.js and Python data pipeline that parses proprietary .dump.pgm and .tip X-ray formats, extracts dual-energy pixel data, and generates 16-bit PNG and NumPy outputs for downstream processing. Developed a full-stack synthetic X-ray scan generation system using React, TypeScript, Node.js, Express.js, and Docker, supporting bulk ingestion, library management, interactive bag-region editing, and automated scan generation. Engineered a worker-pool processing system with batched task dispatch, concurrency control, and polygon-based collision detection, cutting process-spawn overhead by up to 90%.",
+            image: vehantLogo
+        },
+        {
+            id: "iar",
+            title: "IAR Cell at IIT Palakkad",
+            role: "Technical Team Lead",
+            location: "Palakkad, India",
+            period: "May 2026 - Present",
+            description: "Leading a 4-member engineering team developing production features for the IIT Palakkad IAR Cell website, serving 2,000+ alumni records across public and authenticated portals. Built a React/Vite admin dashboard with full CRUD, global search, multi-field filtering, pagination, bulk operations, and CSV/Excel/PDF exports, plus Express + Firebase REST APIs with token-based authentication, role-based access, and cursor-based pagination.",
+            image: iarCellLogo
+        },
+        {
             id: "iac",
             title: "Industry Academia Conclave at IIT Palakkad",
             role: "Official Front End Developer",
@@ -167,25 +186,16 @@ export const portfolioData = {
             period: "Nov 2024 - Nov 2024",
             description: "Manage the event website and solve problems as they arise. An event that brings together industry leaders, innovators, researchers, and students to interact and explore real-world challenges.",
             image: iacLogo
-        },
-        {
-            id: "iar",
-            title: "IAR Cell at IIT Palakkad",
-            role: "Technical Team Lead",
-            location: "Palakkad, India",
-            period: "Aug 2024 - Present",
-            description: "Developed and maintained the official IAR Cell website to support industry–academia collaboration initiatives. Implemented responsive UI components, improved usability, and resolved real-time issues during updates and events. Contributed to a platform that connects industry partners, researchers, alumni, and students to enable collaborations, internships, and innovation.",
-            image: iarCellLogo
         }
     ],
     education: [
         {
             id: "iit",
             institution: "Indian Institute of Technology, Palakkad",
-            degree: "B.Tech in Data Science",
+            degree: "B.Tech in Data Science & Engineering",
             period: "2024 - 2028",
             location: "Palakkad, India",
-            details: "Relevant Coursework: Data Structures & Algorithms, DataBase Management Systems, Object-Oriented Programming (OOP)",
+            details: "CGPA: 8.2/10 • Relevant Coursework: Data Structures & Algorithms, DBMS (PostgreSQL), Object-Oriented Programming, Artificial Intelligence, Optimization, Computer Systems",
             image: iitPkdLogo
         },
         {
@@ -211,13 +221,15 @@ export const portfolioData = {
         { name: "HTML", logo: htmlLogo, category: "Frontend" },
         { name: "CSS", logo: cssLogo, category: "Frontend" },
         { name: "JavaScript", logo: jsLogo, category: "Frontend" },
+        { name: "TypeScript", logo: jsLogo, category: "Frontend" },
         { name: "React", logo: reactLogo, category: "Frontend" },
         { name: "Tailwind", logo: tailwindLogo, category: "Frontend" },
-        { name: "Python", logo: pythonLogo, category: "Backend" },
+        { name: "Python", logo: pythonLogo, category: "Languages" },
         { name: "C++", logo: cppLogo, category: "Languages" },
         { name: "Node.js", logo: nodejsLogo, category: "Backend" },
         { name: "GitHub", logo: githubLogo, category: "Tools" },
         { name: "VS Code", logo: vscodeLogo, category: "Tools" },
+        { name: "Docker", logo: vscodeLogo, category: "Tools" },
     ],
     projects: [
         {
