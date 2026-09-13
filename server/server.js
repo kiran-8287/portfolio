@@ -211,7 +211,7 @@ app.post('/api/chat', async (req, res) => {
 
     // Call generateContentStream on the Gemini 2.5 Flash model
     const responseStream = await ai.models.generateContentStream({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.6-flash',
       contents: contents,
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
